@@ -8,11 +8,11 @@
     <Copyright>Alessandro Colla and contributors</Copyright>
     <PackageProjectUrl>https://github.com/CQRS-Muflone/Muflone/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CQRS-Muflone/Muflone/</RepositoryUrl>
-    <PackageTags>CQRS, Event sourcing, Event store</PackageTags>
-    <AssemblyVersion>0.8.1.1</AssemblyVersion>
-    <FileVersion>0.8.1.1</FileVersion>
+    <PackageTags>CQRS, Eventsourcing, Eventstore</PackageTags>
+    <AssemblyVersion>0.9.0.0</AssemblyVersion>
+    <FileVersion>0.9.0.0</FileVersion>
     <PackageLicenseUrl>https://github.com/CQRS-Muflone/Muflone/blob/master/LICENSE</PackageLicenseUrl>
-    <Version>0.9</Version>
+    <Version>0.9.0</Version>
     <Authors>Alessandro Colla</Authors>
     <Company>CQRS-Muflone</Company>
     <NeutralLanguage>en</NeutralLanguage>
