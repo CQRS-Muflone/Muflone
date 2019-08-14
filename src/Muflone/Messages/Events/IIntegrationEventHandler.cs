@@ -6,7 +6,7 @@ namespace Muflone.Messages.Events
   {
   }
 
-  public interface IIntegrationEventHandler<in T> : IIntegrationEventHandler where T : IntegrationEvent
+  public interface IIntegrationEventHandler<in T> : IIntegrationEventHandler where T : IIntegrationEvent
   {
     Task Handle(T @event);
   }

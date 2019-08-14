@@ -1,15 +1,16 @@
 ﻿using System;
+using Muflone.Core;
 
 namespace Muflone.Messages.Events
 {
   public abstract class IntegrationEvent : IIntegrationEvent
   {
-    public Guid AggregateId { get; }
+    public IDomainId AggregateId { get; }
     public EventHeaders Headers { get; set; }
     public int Version { get; set; }
     public Guid MessageId { get; set; }
 
-    protected IntegrationEvent(Guid aggregateId, Guid correlationId, string who = "anonymous")
+    protected IntegrationEvent(IDomainId aggregateId, Guid correlationId, string who = "anonymous")
     {
       Headers = new EventHeaders()
       {
@@ -22,8 +23,8 @@ namespace Muflone.Messages.Events
       AggregateId = aggregateId;
     }
 
-    protected IntegrationEvent(Guid aggregateId, string who = "anonymous")
-      : this(aggregateId, aggregateId, who)
+    protected IntegrationEvent(IDomainId aggregateId, string who = "anonymous")
+      : this(aggregateId, aggregateId.Value, who)
     {
 
     }
