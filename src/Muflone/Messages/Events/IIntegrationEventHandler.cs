@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events
 {
-  public interface IIntegrationEventHandler
+  public interface IIntegrationEventHandler: IDisposable
   {
   }
 
-  public interface IIntegrationEventHandler<in T> : IIntegrationEventHandler where T : IntegrationEvent
+  public interface IIntegrationEventHandler<in TEvent> : IIntegrationEventHandler where TEvent : IIntegrationEvent
   {
-    Task Handle(T @event);
+    Task Handle(TEvent @event);
   }
 }
