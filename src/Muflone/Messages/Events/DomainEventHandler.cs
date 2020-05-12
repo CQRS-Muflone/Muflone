@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Muflone.Messages.Events;
+using Muflone.Persistence;
 
 namespace Muflone.Messages.Commands
 {
