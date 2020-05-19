@@ -5,12 +5,12 @@ using Muflone.Persistence;
 
 namespace Muflone.Messages.Events
 {
-	public abstract class DomainEventHandler<TEvent> : IDomainEventHandler<TEvent> where TEvent : IDomainEvent
+	public abstract class IntegrationEventHandler<TEvent> : IIntegrationEventHandler<TEvent> where TEvent : IIntegrationEvent
 	{
 		protected readonly IPersister Persister;
 		protected readonly ILoggerFactory LoggerFactory;
 
-		protected DomainEventHandler(IPersister persister, ILoggerFactory loggerFactory)
+		protected IntegrationEventHandler(IPersister persister, ILoggerFactory loggerFactory)
 		{
 			Persister = persister;
 			LoggerFactory = loggerFactory;
@@ -31,7 +31,7 @@ namespace Muflone.Messages.Events
 			GC.SuppressFinalize(this);
 		}
 
-		~DomainEventHandler()
+		~IntegrationEventHandler()
 		{
 			Dispose(false);
 		}
