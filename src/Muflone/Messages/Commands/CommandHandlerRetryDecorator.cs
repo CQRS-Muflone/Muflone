@@ -25,6 +25,7 @@ namespace Muflone.Messages.Commands
 				try
 				{
 					await commandHandler.Handle(command);
+					return;
 				}
 				catch (Exception e)
 				{
