@@ -24,7 +24,7 @@ namespace Muflone.Messages.Events
 		}
 
 		protected IntegrationEvent(IDomainId aggregateId, string who = "anonymous")
-			: this(aggregateId, aggregateId.Value, who)
+			: this(aggregateId, Guid.NewGuid(), who)
 		{
 
 		}

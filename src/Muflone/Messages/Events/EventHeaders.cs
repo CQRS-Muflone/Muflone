@@ -16,26 +16,26 @@ namespace Muflone.Messages.Events
 
     public Guid CorrelationId
     {
-      get { return Guid.Parse(Standards[EventHeadersType.CorrelationId]); }
-      set { Standards[EventHeadersType.CorrelationId] = value.ToString(); }
+      get { return Guid.Parse(Standards[HeadersType.CorrelationId]); }
+      set { Standards[HeadersType.CorrelationId] = value.ToString(); }
     }
 
     public string Who
     {
-      get { return Standards[EventHeadersType.Who]; }
-      set { Standards[EventHeadersType.Who] = value; }
+      get { return Standards[HeadersType.Who]; }
+      set { Standards[HeadersType.Who] = value; }
     }
 
     public DateTime When
     {
-      get { return DateTime.Parse(Standards[EventHeadersType.When]); }
-      set { Standards[EventHeadersType.When] = value.ToString("O"); }
+      get { return DateTime.Parse(Standards[HeadersType.When]); }
+      set { Standards[HeadersType.When] = value.ToString("O"); }
     }
 
     public string AggregateType
     {
-      get { return Standards[EventHeadersType.AggregateType]; }
-      set { Standards[EventHeadersType.AggregateType] = value; }
+      get { return Standards[HeadersType.AggregateType]; }
+      set { Standards[HeadersType.AggregateType] = value; }
     }
 
     public bool ContainsKey(string key)
