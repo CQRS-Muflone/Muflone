@@ -3,32 +3,14 @@ using Muflone.Core;
 
 namespace Muflone.Messages.Events
 {
-	public abstract class DomainEvent : IDomainEvent
+	public abstract class DomainEvent : Event, IDomainEvent
 	{
-		public IDomainId AggregateId { get; }
-		public EventHeaders Headers { get; set; }
-		public int Version { get; set; }
-		public Guid MessageId { get; set; }
-
-		protected DomainEvent(IDomainId aggregateId, Guid correlationId, string who = "anonymous")
+		protected DomainEvent(IDomainId aggregateId, Guid correlationId, string who = "anonymous") : base(aggregateId, correlationId, who)
 		{
-			Headers = new EventHeaders()
-			{
-				Who = who,
-				CorrelationId = correlationId,
-				When = DateTime.UtcNow,
-				AggregateType = GetType().Name
-			};
-			MessageId = Guid.NewGuid();
-			AggregateId = aggregateId;
 		}
 
-		protected DomainEvent(IDomainId aggregateId, string who = "anonymous")
-			: this(aggregateId, Guid.NewGuid(), who)
+		protected DomainEvent(IDomainId aggregateId, string who = "anonymous") : base(aggregateId, who)
 		{
-
 		}
-
-		public string Who => Headers.Who;
 	}
 }
