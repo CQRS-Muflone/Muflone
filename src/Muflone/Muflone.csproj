@@ -5,22 +5,34 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Description>A CQRS and event store library</Description>
-    <Copyright>Alessandro Colla and contributors</Copyright>
+    <Copyright>Alessandro Colla, Alberto Acerbis and contributors</Copyright>
     <PackageProjectUrl>https://github.com/CQRS-Muflone/Muflone/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CQRS-Muflone/Muflone/</RepositoryUrl>
     <PackageTags>CQRS, Eventsourcing, Eventstore</PackageTags>
-    <AssemblyVersion>0.9.4.0</AssemblyVersion>
-    <FileVersion>0.9.4.0</FileVersion>
+    <AssemblyVersion>0.1.0.1</AssemblyVersion>
+    <FileVersion>0.1.0.1</FileVersion>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <Version>0.9.4</Version>
-    <Authors>Alessandro Colla</Authors>
+    <Version>1.0.1</Version>
+    <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Company>CQRS-Muflone</Company>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
