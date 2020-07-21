@@ -4,7 +4,7 @@ namespace Muflone.Core
 {
   public abstract class Entity: IEquatable<Entity>
   {
-    internal readonly IDomainId Id;
+    public readonly IDomainId Id;
     
     protected Entity()
     {
