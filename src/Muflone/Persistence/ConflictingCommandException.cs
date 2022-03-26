@@ -1,14 +1,14 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Muflone.Persistence
+namespace Muflone.Persistence;
+
+/// <summary>
+///   Represents a command that could not be executed because it conflicted with the command of another user or actor.
+/// </summary>
+[Serializable]
+public class ConflictingCommandException : Exception
 {
-  /// <summary>
-  ///   Represents a command that could not be executed because it conflicted with the command of another user or actor.
-  /// </summary>
-  [Serializable]
-  public class ConflictingCommandException : Exception
-  {
     /// <summary>
     ///   Initializes a new instance of the ConflictingCommandException class.
     /// </summary>
@@ -20,7 +20,7 @@ namespace Muflone.Persistence
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public ConflictingCommandException(string message)
-      : base(message)
+        : base(message)
     { }
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace Muflone.Persistence
     /// <param name="message">The message that describes the error.</param>
     /// <param name="innerException">The message that is the cause of the current exception.</param>
     public ConflictingCommandException(string message, Exception innerException)
-      : base(message, innerException)
+        : base(message, innerException)
     { }
 
     /// <summary>
@@ -38,7 +38,6 @@ namespace Muflone.Persistence
     /// <param name="info">The SerializationInfo that holds the serialized object data of the exception being thrown.</param>
     /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
     protected ConflictingCommandException(SerializationInfo info, StreamingContext context)
-      : base(info, context)
+        : base(info, context)
     { }
-  }
 }

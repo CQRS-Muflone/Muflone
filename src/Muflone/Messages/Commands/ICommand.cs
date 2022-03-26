@@ -1,9 +1,8 @@
 ﻿using Muflone.Core;
 
-namespace Muflone.Messages.Commands
+namespace Muflone.Messages.Commands;
+
+public interface ICommand : IMessage
 {
-  public interface ICommand : IMessage
-  {
-    IDomainId AggregateId { get; }
-  }
+    DomainId AggregateId { get; }
 }

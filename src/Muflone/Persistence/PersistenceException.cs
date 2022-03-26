@@ -1,14 +1,14 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Muflone.Persistence
+namespace Muflone.Persistence;
+
+/// <summary>
+///   Represents a general failure of the persistence infrastructure.
+/// </summary>
+[Serializable]
+public class PersistenceException : Exception
 {
-  /// <summary>
-  ///   Represents a general failure of the persistence infrastructure.
-  /// </summary>
-  [Serializable]
-  public class PersistenceException : Exception
-  {
     /// <summary>
     ///   Initializes a new instance of the PersistenceException class.
     /// </summary>
@@ -20,7 +20,7 @@ namespace Muflone.Persistence
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
     public PersistenceException(string message)
-      : base(message)
+        : base(message)
     { }
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace Muflone.Persistence
     /// <param name="message">The message that describes the error.</param>
     /// <param name="innerException">The message that is the cause of the current exception.</param>
     public PersistenceException(string message, Exception innerException)
-      : base(message, innerException)
+        : base(message, innerException)
     { }
 
     /// <summary>
@@ -38,7 +38,6 @@ namespace Muflone.Persistence
     /// <param name="info">The SerializationInfo that holds the serialized object data of the exception being thrown.</param>
     /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
     protected PersistenceException(SerializationInfo info, StreamingContext context)
-      : base(info, context)
+        : base(info, context)
     { }
-  }
 }

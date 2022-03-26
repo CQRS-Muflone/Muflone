@@ -1,16 +1,34 @@
 ﻿using System;
-using Muflone.Core;
+using System.Collections.Generic;
+using MassTransit;
+using Muflone.CustomTypes;
+using Muflone.Factories;
 
-namespace Muflone.Messages.Events
+namespace Muflone.Messages.Events;
+
+public abstract class IntegrationEvent : IIntegrationEvent
 {
-	public abstract class IntegrationEvent : Event, IIntegrationEvent
-	{
-		protected IntegrationEvent(IDomainId aggregateId, Guid correlationId, string who = "anonymous") : base(aggregateId, correlationId, who)
-		{
-		}
+    public Guid AggregateId { get; }
+    public EventHeaders Headers { get; set; }
+    public int Version { get; set; }
+    public Guid MessageId { get; set; }
+    public Dictionary<string, object> UserProperties { get; set; }
 
-		protected IntegrationEvent(IDomainId aggregateId, string who = "anonymous") : base(aggregateId, who)
-		{
-		}
-	}
+    protected IntegrationEvent(Guid aggregateId, Guid correlationId)
+    {
+        Headers = new EventHeaders
+        {
+            Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous")),
+            CorrelationId = correlationId,
+            When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
+            AggregateType = GetType().Name
+        };
+        MessageId = GuidExtension.GetNewGuid();
+        AggregateId = aggregateId;
+    }
+
+    protected IntegrationEvent(Guid aggregateId)
+        : this(aggregateId, aggregateId)
+    {
+    }
 }

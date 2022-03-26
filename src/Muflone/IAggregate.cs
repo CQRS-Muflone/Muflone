@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using Muflone.Core;
+using System;
+using System.Collections;
 
-namespace Muflone
+namespace Muflone;
+
+public interface IAggregate
 {
-  public interface IAggregate
-  {
-    IDomainId Id { get; }
+    Guid Id { get; }
     int Version { get; }
+
     void ApplyEvent(object @event);
     ICollection GetUncommittedEvents();
     void ClearUncommittedEvents();
+
     IMemento GetSnapshot();
-  }
 }

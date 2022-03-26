@@ -1,13 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿namespace Muflone.Persistence;
 
-namespace Muflone.Persistence
-{
-  public static class RepositoryExtensions
-  {
-    public static async Task Save(this IRepository repository, IAggregate aggregate, Guid commitId)
-    {
-      await repository.Save(aggregate, commitId, a => { });
-    }
-  }
-}
+//public static class RepositoryExtensions
+//{
+//  public static async Task SaveAsync(this IRepository repository, IAggregate aggregate, Guid commitId)
+//  {
+//    await repository.SaveAsync(aggregate, commitId, a => { });
+//  }
+//}

@@ -1,10 +1,8 @@
 using System;
-using Muflone.Core;
 
-namespace Muflone.Persistence
+namespace Muflone.Persistence;
+
+public interface IConstructAggregates
 {
-  public interface IConstructAggregates
-  {
-    IAggregate Build(Type type, IDomainId id, IMemento snapshot);
-  }
+    IAggregate Build(Type type, Guid id, IMemento snapshot);
 }

@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Muflone.Messages;
 
-namespace Muflone
+namespace Muflone;
+
+public interface IEventBus
 {
-  public interface IEventBus
-  {
-    Task Publish(IMessage @event);
-  }
+    Task PublishAsync(IMessage @event);
 }
