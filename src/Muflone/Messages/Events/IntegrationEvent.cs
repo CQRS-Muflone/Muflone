@@ -18,7 +18,7 @@ public abstract class IntegrationEvent : IIntegrationEvent
     {
         Headers = new EventHeaders
         {
-            Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous")),
+            Who = new Account(NewId.NextGuid().ToString(), "Anonymous"),
             CorrelationId = correlationId,
             When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()),
             AggregateType = GetType().Name

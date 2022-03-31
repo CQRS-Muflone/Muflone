@@ -12,15 +12,15 @@ public class SerializationTest
     [Fact]
     public void Can_SerializeAndDeserialize_Event()
     {
-        var accountId = new AccountId(Guid.NewGuid());
+        var accountId = Guid.NewGuid().ToString();
 
         var stateUpdated = new StateUpdated(new StateId(Guid.NewGuid()),
-            new AccountInfo(accountId, new AccountName("Name")));
+            new Account(accountId, "Name"));
 
         Thread.Sleep(200);
 
-        Assert.False(stateUpdated.When.Value > DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-        Assert.Equal(accountId, stateUpdated.Who.AccountId);
+        Assert.False(stateUpdated.When.Value > DateTimeOffset.UtcNow);
+        Assert.Equal(accountId, stateUpdated.Who.Id);
     }
 }
 
@@ -28,7 +28,7 @@ public class StateUpdated : DomainEvent
 {
     public readonly StateId StateId;
 
-    public StateUpdated(StateId aggregateId, AccountInfo who) : base(aggregateId, who,
+    public StateUpdated(StateId aggregateId, Account who) : base(aggregateId, who,
         new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
     {
         StateId = aggregateId;

@@ -21,14 +21,14 @@ public sealed class EventHeaders
         set => Standards[EventHeadersType.CorrelationId] = value.ToString();
     }
 
-    public AccountInfo Who
+    public Account Who
     {
-        get => new (new AccountId(Guid.Parse(Standards[EventHeadersType.AccountId])),
-            new AccountName(Standards[EventHeadersType.AccountName]));
+        get => new Account(Standards[EventHeadersType.AccountId],
+            Standards[EventHeadersType.AccountName]);
         set
         {
-            Standards[EventHeadersType.AccountId] = value.AccountId.Value.ToString();
-            Standards[EventHeadersType.AccountName] = value.AccountName.Value;
+            Standards[EventHeadersType.AccountId] = value.Id;
+            Standards[EventHeadersType.AccountName] = value.Name;
         }
     }
 

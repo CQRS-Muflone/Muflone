@@ -15,7 +15,7 @@ public class Command : ICommand
     public DomainId AggregateId { get; set; }
     public Guid MessageId { get; set; }
     public Dictionary<string, object> UserProperties { get; set;  }
-    public AccountInfo Who { get; }
+    public Account Who { get; }
     public When When { get; }
 
     protected Command(DomainId aggregateId)
@@ -23,7 +23,7 @@ public class Command : ICommand
         AggregateId = aggregateId;
         MessageId = GuidExtension.GetNewGuid();
         UserProperties = new Dictionary<string, object>();
-        Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous"));
+        Who = new Account(NewId.NextGuid().ToString(), "Anonymous");
         When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
     }
 
@@ -32,11 +32,11 @@ public class Command : ICommand
         AggregateId = aggregateId;
         MessageId = commitId;
         UserProperties = new Dictionary<string, object>();
-        Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous"));
+        Who = new Account(NewId.NextGuid().ToString(), "Anonymous");
         When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
     }
 
-    protected Command(DomainId aggregateId, AccountInfo who)
+    protected Command(DomainId aggregateId, Account who)
     {
         AggregateId = aggregateId;
         MessageId = GuidExtension.GetNewGuid();
@@ -45,7 +45,7 @@ public class Command : ICommand
         When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
     }
 
-    protected Command(DomainId aggregateId, AccountInfo who, When when)
+    protected Command(DomainId aggregateId, Account who, When when)
     {
         AggregateId = aggregateId;
         MessageId = GuidExtension.GetNewGuid();
@@ -54,7 +54,7 @@ public class Command : ICommand
         When = when;
     }
 
-    protected Command(DomainId aggregateId, Guid commitId, AccountInfo who)
+    protected Command(DomainId aggregateId, Guid commitId, Account who)
     {
         AggregateId = aggregateId;
         MessageId = commitId;
@@ -63,7 +63,7 @@ public class Command : ICommand
         When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
     }
 
-    protected Command(DomainId aggregateId, Guid commitId, AccountInfo who, When when)
+    protected Command(DomainId aggregateId, Guid commitId, Account who, When when)
     {
         AggregateId = aggregateId;
         MessageId = commitId;

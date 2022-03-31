@@ -19,7 +19,7 @@ public abstract class DomainEvent : IDomainEvent
     public Guid MessageId { get; set; }
     public Dictionary<string, object> UserProperties { get; set; }
     public int Version { get; set; }
-    public AccountInfo Who => Headers.Who;
+    public Account Who => Headers.Who;
     public When When => Headers.When;
 
     protected DomainEvent(DomainId aggregateId)
@@ -28,7 +28,7 @@ public abstract class DomainEvent : IDomainEvent
         {
             CorrelationId = NewId.NextGuid(),
             AggregateType = GetType().Name,
-            Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous")),
+            Who = new Account(NewId.NextGuid().ToString(), "Anonymous"),
             When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         };
         MessageId = GuidExtension.GetNewGuid();
@@ -41,14 +41,14 @@ public abstract class DomainEvent : IDomainEvent
         {
             CorrelationId = correlationId,
             AggregateType = GetType().Name,
-            Who = new AccountInfo(new AccountId(NewId.NextGuid()), new AccountName("Anonymous")),
+            Who = new Account(NewId.NextGuid().ToString(), "Anonymous"),
             When = new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         };
         MessageId = GuidExtension.GetNewGuid();
         AggregateId = aggregateId;
     }
 
-    protected DomainEvent(DomainId aggregateId, AccountInfo who)
+    protected DomainEvent(DomainId aggregateId, Account who)
     {
         Headers = new EventHeaders
         {
@@ -61,7 +61,7 @@ public abstract class DomainEvent : IDomainEvent
         AggregateId = aggregateId;
     }
 
-    protected DomainEvent(DomainId aggregateId, Guid correlationId, AccountInfo who)
+    protected DomainEvent(DomainId aggregateId, Guid correlationId, Account who)
     {
         Headers = new EventHeaders
         {
@@ -74,7 +74,7 @@ public abstract class DomainEvent : IDomainEvent
         AggregateId = aggregateId;
     }
 
-    protected DomainEvent(DomainId aggregateId, Guid correlationId, AccountInfo who, When when)
+    protected DomainEvent(DomainId aggregateId, Guid correlationId, Account who, When when)
     {
         Headers = new EventHeaders
         {
@@ -87,7 +87,7 @@ public abstract class DomainEvent : IDomainEvent
         AggregateId = aggregateId;
     }
 
-    protected DomainEvent(DomainId aggregateId, AccountInfo who, When when)
+    protected DomainEvent(DomainId aggregateId, Account who, When when)
         : this(aggregateId, aggregateId.Value, who, when)
     {
     }

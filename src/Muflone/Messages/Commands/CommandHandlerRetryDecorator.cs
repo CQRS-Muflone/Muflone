@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Muflone.Messages.Commands
 {
-    public abstract class CommandHandlerRetryDecorator<TCommand> : ICommandHandlerAsync<TCommand> where TCommand : ICommand
+    public abstract class CommandHandlerRetryDecorator<TCommand> : ICommandHandlerAsync<TCommand> where TCommand : class, ICommand
     {
         private readonly ICommandHandlerAsync<TCommand> commandHandler;
         private readonly int retries;
@@ -25,7 +25,7 @@ namespace Muflone.Messages.Commands
             {
                 try
                 {
-                    await commandHandler.HandleAsync(command);
+                    await commandHandler.HandleAsync(command, cancellationToken);
                     return;
                 }
                 catch (Exception e)
