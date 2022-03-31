@@ -1,3 +1,20 @@
-﻿namespace Muflone.CustomTypes;
+﻿using System;
 
-public record When(long Value);
+namespace Muflone.CustomTypes;
+
+public record When
+{
+    private readonly long ticks;
+    public DateTime Value => new(ticks);
+
+    public When(DateTime dateTime)
+    {
+        ticks = dateTime.Ticks;
+    }
+
+    public When(long ticks)
+    {
+        this.ticks = ticks;
+    }
+}
+

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Muflone.Core;
 
-public abstract class AggregateBase : IAggregate, IEquatable<IAggregate>
+public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
 {
     private readonly ICollection<object> _uncommittedEvents = new LinkedList<object>();
 
     private IRouteEvents _registeredRoutes;
 
-    protected AggregateBase()
+    protected AggregateRoot()
         : this(null)
     { }
 
-    protected AggregateBase(IRouteEvents handler)
+    protected AggregateRoot(IRouteEvents handler)
     {
         if (handler == null)
         {
