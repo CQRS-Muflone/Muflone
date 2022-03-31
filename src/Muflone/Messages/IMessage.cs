@@ -9,10 +9,11 @@ namespace Muflone.Messages;
 /// </summary>
 public interface IMessage
 {
-    /// <summary>
-    /// Gets or sets the identifier.
-    /// </summary>
-    /// <value>The identifier.</value>
-    Guid MessageId { get; set; }
-    Dictionary<string, object> UserProperties { get; set; }
+	/// <summary>
+	/// Gets or sets the identifier.
+	/// </summary>
+	/// <value>The identifier.</value>
+	Guid MessageId { get; set; }
+
+	Dictionary<string, object> UserProperties { get; set; }
 }

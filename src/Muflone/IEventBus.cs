@@ -5,5 +5,5 @@ namespace Muflone;
 
 public interface IEventBus
 {
-    Task PublishAsync(IMessage @event);
+	Task PublishAsync(IMessage @event);
 }

@@ -4,5 +4,5 @@ namespace Muflone.Persistence;
 
 public interface IConstructSagas
 {
-    ISaga Build(Type type, string id);
+	ISaga Build(Type type, string id);
 }

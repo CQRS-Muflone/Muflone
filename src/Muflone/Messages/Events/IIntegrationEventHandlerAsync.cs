@@ -9,5 +9,5 @@ public interface IIntegrationEventHandlerAsync
 
 public interface IIntegrationEventHandlerAsync<in T> : IIntegrationEventHandlerAsync where T : IIntegrationEvent
 {
-    Task HandleAsync(T @event, CancellationToken cancellationToken = default(CancellationToken));
+	Task HandleAsync(T @event, CancellationToken cancellationToken = default(CancellationToken));
 }

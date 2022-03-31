@@ -4,17 +4,17 @@ namespace Muflone;
 
 public interface ISaga
 {
-    string Id { get; }
+	string Id { get; }
 
-    int Version { get; }
+	int Version { get; }
 
-    void Transition(object message);
+	void Transition(object message);
 
-    ICollection GetUncommittedEvents();
+	ICollection GetUncommittedEvents();
 
-    void ClearUncommittedEvents();
+	void ClearUncommittedEvents();
 
-    ICollection GetUndispatchedMessages();
+	ICollection GetUndispatchedMessages();
 
-    void ClearUndispatchedMessages();
+	void ClearUndispatchedMessages();
 }

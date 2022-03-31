@@ -4,5 +4,5 @@ namespace Muflone.Messages.Events;
 
 public interface IDomainEventFactory
 {
-    IDomainEventHandler CreateDomainEventHandler(Type handlerType);
+	IDomainEventHandler CreateDomainEventHandler(Type handlerType);
 }

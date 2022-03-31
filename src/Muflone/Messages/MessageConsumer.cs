@@ -10,12 +10,12 @@ namespace Muflone.Messages;
 /// </summary>
 public abstract class MessageConsumer<TMessage> where TMessage : class, IMessage
 {
-    protected readonly IMessageMapper<TMessage> MessageMapper;
+	protected readonly IMessageMapper<TMessage> MessageMapper;
 
-    protected MessageConsumer(IMessageMapper<TMessage> messageMapper)
-    {
-        MessageMapper = messageMapper;
-    }
+	protected MessageConsumer(IMessageMapper<TMessage> messageMapper)
+	{
+		MessageMapper = messageMapper;
+	}
 
-    public abstract Task ConsumeMessagesAsync(TMessage message, CancellationToken cancellationToken = default);
+	public abstract Task ConsumeMessagesAsync(TMessage message, CancellationToken cancellationToken = default);
 }

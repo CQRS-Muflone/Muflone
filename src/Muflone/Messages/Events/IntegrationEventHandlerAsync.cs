@@ -5,28 +5,30 @@ using System.Threading.Tasks;
 namespace Muflone.Messages.Events;
 
 public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHandlerAsync<TEvent>
-    where TEvent : IntegrationEvent
+	where TEvent : IntegrationEvent
 {
-    public abstract Task HandleAsync(TEvent @event,
-        CancellationToken cancellationToken = default(CancellationToken));
+	public abstract Task HandleAsync(TEvent @event,
+		CancellationToken cancellationToken = default(CancellationToken));
 
-    #region Dispose
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-        }
-    }
+	#region Dispose
 
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+		}
+	}
 
-    ~IntegrationEventHandlerAsync()
-    {
-        Dispose(false);
-    }
-    #endregion
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
+
+	~IntegrationEventHandlerAsync()
+	{
+		Dispose(false);
+	}
+
+	#endregion
 }
