@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MassTransit;
 using Muflone.Core;
 using Muflone.CustomTypes;
 
@@ -26,12 +27,12 @@ namespace Muflone.Messages.Events
 
 
 		protected Event(IDomainId aggregateId)
-			: this(aggregateId, Guid.NewGuid(), default, new When(DateTime.UtcNow))
+			: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"), new When(DateTime.UtcNow))
 		{
 		}
 
 		protected Event(IDomainId aggregateId, Guid correlationId)
-			: this(aggregateId, correlationId, default, new When(DateTime.UtcNow))
+			: this(aggregateId, correlationId, new Account(NewId.NextGuid().ToString(), "Anonymous"), new When(DateTime.UtcNow))
 		{
 		}
 
