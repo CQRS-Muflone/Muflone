@@ -1,6 +1,4 @@
-﻿using Muflone.CustomTypes;
-
-namespace Muflone.Messages.Events;
+﻿namespace Muflone.Messages.Events;
 
 public interface IEvent : IMessage
 {

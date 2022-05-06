@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using MassTransit;
 using Muflone.Core;
 using Muflone.CustomTypes;
-using Muflone.Factories;
 
 namespace Muflone.Messages.Commands;
 

@@ -32,9 +32,7 @@ namespace Muflone.Core
 		public void Register<T>(Action<T> handler)
 		{
 			if (handler == null)
-			{
-				throw new ArgumentNullException("handler");
-			}
+				throw new ArgumentNullException(nameof(handler));
 
 			Register(typeof(T), @event => handler((T)@event));
 		}
@@ -60,7 +58,7 @@ namespace Muflone.Core
 		public void Dispatch(object eventMessage)
 		{
 			if (eventMessage == null)
-				throw new ArgumentNullException("eventMessage");
+				throw new ArgumentNullException(nameof(eventMessage));
 
 			if (handlers.TryGetValue(eventMessage.GetType(), out var handler))
 				handler(eventMessage);

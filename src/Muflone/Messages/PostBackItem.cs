@@ -4,8 +4,8 @@ namespace Muflone.Messages;
 
 public class PostBackItem
 {
-	private readonly SendOrPostCallback _sendOrPostCallback;
-	private readonly object _postbackState;
+	private readonly SendOrPostCallback sendOrPostCallback;
+	private readonly object postbackState;
 
 	/// <summary>
 	/// Creates an instance of PostBackItem
@@ -14,13 +14,13 @@ public class PostBackItem
 	/// <param name="postbackState">The arguments to pass to <see cref="sendOrPostCallback"/></param>
 	public PostBackItem(SendOrPostCallback sendOrPostCallback, object postbackState)
 	{
-		_sendOrPostCallback = sendOrPostCallback;
-		_postbackState = postbackState;
+		this.sendOrPostCallback = sendOrPostCallback;
+		this.postbackState = postbackState;
 	}
 
 
 	public void Call()
 	{
-		_sendOrPostCallback(_postbackState);
+		sendOrPostCallback(postbackState);
 	}
 }

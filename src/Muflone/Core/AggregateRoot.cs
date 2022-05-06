@@ -26,7 +26,7 @@ namespace Muflone.Core
 
 		protected IRouteEvents RegisteredRoutes
 		{
-			get => registeredRoutes ?? (registeredRoutes = new ConventionEventRouter(true, this));
+			get => registeredRoutes ??= new ConventionEventRouter(true, this);
 			set => registeredRoutes =
 				value ?? throw new InvalidOperationException("AggregateRoot must have an event router to function");
 		}
