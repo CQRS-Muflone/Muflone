@@ -2,20 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>6.0.2</Version>
-    <Authors>Alberto Acerbis - Alessandro Colla</Authors>
+    <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Product>Muflone</Product>
-    <Description>Base library to implement DDD CQRS/ES concepts
-Start from CommonDomain</Description>
+    <Description>A CQRS and event store library</Description>
     <Copyright />
-    <PackageProjectUrl>https://github.com/CQRS-Muflone/Muflone.git</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/CQRS-Muflone/Muflone.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/CQRS-Muflone/Muflone/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CQRS-Muflone/Muflone/</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>DDD, CQRS/ES</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>.NET6 Support, improved messaging part</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
