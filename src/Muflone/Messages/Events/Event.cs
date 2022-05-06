@@ -27,12 +27,14 @@ namespace Muflone.Messages.Events
 
 
 		protected Event(IDomainId aggregateId)
-			: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"), new When(DateTime.UtcNow))
+			: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
+				new When(DateTime.UtcNow))
 		{
 		}
 
 		protected Event(IDomainId aggregateId, Guid correlationId)
-			: this(aggregateId, correlationId, new Account(NewId.NextGuid().ToString(), "Anonymous"), new When(DateTime.UtcNow))
+			: this(aggregateId, correlationId, new Account(NewId.NextGuid().ToString(), "Anonymous"),
+				new When(DateTime.UtcNow))
 		{
 		}
 
