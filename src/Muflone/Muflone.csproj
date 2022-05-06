@@ -10,8 +10,8 @@
     <Description>Base library to implement DDD CQRS/ES concepts
 Start from CommonDomain</Description>
     <Copyright />
-    <PackageProjectUrl>https://github.com/Ace68/Muflone.git</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Ace68/Muflone.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/CQRS-Muflone/Muflone.git</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CQRS-Muflone/Muflone.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>DDD, CQRS/ES</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
