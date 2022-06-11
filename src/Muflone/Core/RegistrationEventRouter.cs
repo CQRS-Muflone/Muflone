@@ -5,24 +5,24 @@ namespace Muflone.Core;
 
 public class RegistrationEventRouter : IRouteEvents
 {
-	private readonly IDictionary<Type, Action<object>> handlers = new Dictionary<Type, Action<object>>();
+	private readonly IDictionary<Type, Action<object>> _handlers = new Dictionary<Type, Action<object>>();
 
-	private IAggregate regsitered;
+	private IAggregate _regsitered;
 
 	public virtual void Register<T>(Action<T> handler)
 	{
-		handlers[typeof(T)] = @event => handler((T)@event);
+		_handlers[typeof(T)] = @event => handler((T)@event);
 	}
 
 	public virtual void Register(IAggregate aggregate)
 	{
-		regsitered = aggregate ?? throw new ArgumentNullException("aggregate");
+		_regsitered = aggregate ?? throw new ArgumentNullException("aggregate");
 	}
 
 	public virtual void Dispatch(object eventMessage)
 	{
-		if (!handlers.TryGetValue(eventMessage.GetType(), out var handler))
-			regsitered.ThrowHandlerNotFound(eventMessage);
+		if (!_handlers.TryGetValue(eventMessage.GetType(), out var handler))
+			_regsitered.ThrowHandlerNotFound(eventMessage);
 
 		handler?.Invoke(eventMessage);
 	}

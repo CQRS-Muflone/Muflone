@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Muflone.Core
+namespace Muflone.Core;
+
+public interface IDomainId
 {
-	public interface IDomainId
-	{
-		Guid Value { get; }
-	}
+    Guid Value { get; }
 }

@@ -2,109 +2,91 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Muflone.Core
+namespace Muflone.Core;
+
+public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
 {
-	public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
-	{
-		private readonly ICollection<object> uncommittedEvents = new LinkedList<object>();
+    private readonly ICollection<object> _uncommittedEvents = new LinkedList<object>();
 
-		private IRouteEvents registeredRoutes;
+    private IRouteEvents _registeredRoutes;
 
-		protected AggregateRoot()
-			: this(null)
-		{
-		}
+    protected AggregateRoot()
+        : this(null)
+    {
+    }
 
-		protected AggregateRoot(IRouteEvents handler)
-		{
-			if (handler == null)
-				return;
+    protected AggregateRoot(IRouteEvents handler)
+    {
+        if (handler is null)
+            return;
 
-			RegisteredRoutes = handler;
-			RegisteredRoutes.Register(this);
-		}
+        RegisteredRoutes = handler;
+        RegisteredRoutes.Register(this);
+    }
 
-		protected IRouteEvents RegisteredRoutes
-		{
-			get => registeredRoutes ??= new ConventionEventRouter(true, this);
-			set => registeredRoutes =
-				value ?? throw new InvalidOperationException("AggregateRoot must have an event router to function");
-		}
+    protected IRouteEvents RegisteredRoutes
+    {
+        get => _registeredRoutes ??= new ConventionEventRouter(true, this);
+        set => _registeredRoutes =
+            value ?? throw new InvalidOperationException("AggregateRoot must have an event router to function");
+    }
 
-		public IDomainId Id { get; protected set; }
-		public int Version { get; protected set; }
+    public IDomainId Id { get; protected set; }
+    public int Version { get; protected set; }
 
-		void IAggregate.ApplyEvent(object @event)
-		{
-			RegisteredRoutes.Dispatch(@event);
-			Version++;
-		}
+    void IAggregate.ApplyEvent(object @event)
+    {
+        RegisteredRoutes.Dispatch(@event);
+        Version++;
+    }
 
-		ICollection IAggregate.GetUncommittedEvents()
-		{
-			return (ICollection)uncommittedEvents;
-		}
+    ICollection IAggregate.GetUncommittedEvents() => (ICollection)_uncommittedEvents;
 
-		void IAggregate.ClearUncommittedEvents()
-		{
-			uncommittedEvents.Clear();
-		}
+    void IAggregate.ClearUncommittedEvents() => _uncommittedEvents.Clear();
 
-		IMemento IAggregate.GetSnapshot()
-		{
-			var snapshot = GetSnapshot();
-			snapshot.Id = Id.Value;
-			snapshot.Version = Version;
-			return snapshot;
-		}
+    IMemento IAggregate.GetSnapshot()
+    {
+        var snapshot = GetSnapshot();
+        snapshot.Id = Id.Value;
+        snapshot.Version = Version;
 
-		public virtual bool Equals(IAggregate other)
-		{
-			return null != other && GetType() == other.GetType() && other.Id.GetType() == Id.GetType() &&
-			       other.Id.Value == Id.Value;
-		}
+        return snapshot;
+    }
 
-		protected void Register<T>(Action<T> route)
-		{
-			RegisteredRoutes.Register(route);
-		}
+    public virtual bool Equals(IAggregate other)
+    {
+        return null != other && GetType() == other.GetType() && other.Id.GetType() == Id.GetType() &&
+               other.Id.Value == Id.Value;
+    }
 
-		protected void RaiseEvent(object @event)
-		{
-			((IAggregate)this).ApplyEvent(@event);
-			uncommittedEvents.Add(@event);
-		}
+    protected void Register<T>(Action<T> route)
+    {
+        RegisteredRoutes.Register(route);
+    }
 
-		protected virtual IMemento GetSnapshot()
-		{
-			return null;
-		}
+    protected void RaiseEvent(object @event)
+    {
+        ((IAggregate)this).ApplyEvent(@event);
+        _uncommittedEvents.Add(@event);
+    }
 
-		public override int GetHashCode()
-		{
-			return Id.Value.GetHashCode();
-		}
+    protected virtual IMemento GetSnapshot() => null;
 
-		public override bool Equals(object obj)
-		{
-			return Equals(obj as IAggregate);
-		}
+    public override int GetHashCode() => Id.Value.GetHashCode();
 
-		public static bool operator ==(AggregateRoot entity1, AggregateRoot entity2)
-		{
-			if ((object)entity1 == null && (object)entity2 == null)
-				return true;
+    public override bool Equals(object obj) => Equals(obj as IAggregate);
 
-			if ((object)entity1 == null || (object)entity2 == null)
-				return false;
+    public static bool operator ==(AggregateRoot entity1, AggregateRoot entity2)
+    {
+        if ((object)entity1 == null && (object)entity2 == null)
+            return true;
 
-			return entity1.GetType() == entity2.GetType() && entity1.Id.GetType() == entity2.Id.GetType() &&
-			       entity1.Id.Value == entity2.Id.Value;
-		}
+        if ((object)entity1 == null || (object)entity2 == null)
+            return false;
 
-		public static bool operator !=(AggregateRoot entity1, AggregateRoot entity2)
-		{
-			return !(entity1 == entity2);
-		}
-	}
+        return entity1.GetType() == entity2.GetType() && entity1.Id.GetType() == entity2.Id.GetType() &&
+               entity1.Id.Value == entity2.Id.Value;
+    }
+
+    public static bool operator !=(AggregateRoot entity1, AggregateRoot entity2) => !(entity1 == entity2);
 }
