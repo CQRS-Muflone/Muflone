@@ -1,8 +1,5 @@
-﻿namespace Muflone.Messages.Events
-{
-	//Proxy interface
-	public interface IDomainEvent : IEvent
-	{
+﻿namespace Muflone.Messages.Events;
 
-	}
+public interface IDomainEvent : IEvent
+{
 }

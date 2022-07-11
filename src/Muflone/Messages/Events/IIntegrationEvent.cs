@@ -1,8 +1,5 @@
-﻿namespace Muflone.Messages.Events
-{
-	//Proxy interface
-	public interface IIntegrationEvent : IEvent
-	{
+﻿namespace Muflone.Messages.Events;
 
-	}
+public interface IIntegrationEvent : IEvent
+{
 }
