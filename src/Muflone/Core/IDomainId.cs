@@ -4,5 +4,5 @@ namespace Muflone.Core;
 
 public interface IDomainId
 {
-    Guid Value { get; }
+	Guid Value { get; }
 }

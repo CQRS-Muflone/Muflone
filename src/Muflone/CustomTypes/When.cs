@@ -17,6 +17,6 @@ public record When
 	[JsonConstructor]
 	public When(long ticks)
 	{
-		this._ticks = ticks;
+		_ticks = ticks;
 	}
 }

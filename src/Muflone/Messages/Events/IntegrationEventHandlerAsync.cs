@@ -8,7 +8,7 @@ public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHa
 	where TEvent : IntegrationEvent
 {
 	public abstract Task HandleAsync(TEvent @event,
-		CancellationToken cancellationToken = default(CancellationToken));
+		CancellationToken cancellationToken = default);
 
 	#region Dispose
 
