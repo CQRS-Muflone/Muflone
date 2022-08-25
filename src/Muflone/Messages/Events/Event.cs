@@ -47,6 +47,10 @@ public class Event : IEvent
 			Who = who,
 			When = when
 		};
+		//TODO: Delete Headers. Replace with Userprops and move them in Envelope. away from here
+		UserProperties = new Dictionary<string, object>();
+		UserProperties.Add(HeadersNames.CorrelationId, correlationId);
+
 		MessageId = Guid.NewGuid();
 		AggregateId = aggregateId;
 	}

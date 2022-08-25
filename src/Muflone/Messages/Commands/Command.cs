@@ -11,40 +11,40 @@ namespace Muflone.Messages.Commands;
 /// </summary>
 public abstract class Command : ICommand
 {
-	public DomainId AggregateId { get; set; }
+	public IDomainId AggregateId { get; set; }
 	public Guid MessageId { get; set; }
 	public Dictionary<string, object> UserProperties { get; set; }
 	public Account Who { get; }
 	public When When { get; }
 
-	protected Command(DomainId aggregateId)
+	protected Command(IDomainId aggregateId)
 		: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
 			new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
 	{
 	}
 
-	protected Command(DomainId aggregateId, Guid commitId)
+	protected Command(IDomainId aggregateId, Guid commitId)
 		: this(aggregateId, commitId, new Account(NewId.NextGuid().ToString(), "Anonymous"),
 			new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
 	{
 	}
 
-	protected Command(DomainId aggregateId, Account who)
+	protected Command(IDomainId aggregateId, Account who)
 		: this(aggregateId, Guid.NewGuid(), who, new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
 	{
 	}
 
-	protected Command(DomainId aggregateId, Account who, When when)
+	protected Command(IDomainId aggregateId, Account who, When when)
 		: this(aggregateId, Guid.NewGuid(), who, when)
 	{
 	}
 
-	protected Command(DomainId aggregateId, Guid commitId, Account who)
+	protected Command(IDomainId aggregateId, Guid commitId, Account who)
 		: this(aggregateId, commitId, who, new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
 	{
 	}
 
-	protected Command(DomainId aggregateId, Guid commitId, Account who, When when)
+	protected Command(IDomainId aggregateId, Guid commitId, Account who, When when)
 	{
 		AggregateId = aggregateId;
 		MessageId = commitId;
