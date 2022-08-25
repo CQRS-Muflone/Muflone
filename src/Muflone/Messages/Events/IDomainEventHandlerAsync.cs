@@ -1,9 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events;
 
-public interface IDomainEventHandlerAsync
+public interface IDomainEventHandlerAsync : IDisposable
 {
 }
 

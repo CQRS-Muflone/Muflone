@@ -1,8 +1,9 @@
 ﻿using Muflone.Messages.Events;
+using System.Collections.Generic;
 
 namespace Muflone.Factories;
 
 public interface IDomainEventHandlerFactory
 {
-	IDomainEventHandler<T> CreateDomainEventHandler<T>() where T : class, IDomainEvent;
+	IEnumerable<IDomainEventHandler<T>> CreateDomainEventHandlers<T>() where T : class, IDomainEvent;
 }

@@ -13,12 +13,8 @@ public class SerializationTest
 	public void Can_SerializeAndDeserialize_Event()
 	{
 		var accountId = Guid.NewGuid().ToString();
-
-		var stateUpdated = new StateUpdated(new StateId(Guid.NewGuid()),
-			new Account(accountId, "Name"));
-
-		Thread.Sleep(200);
-
+		var stateUpdated = new StateUpdated(new StateId(Guid.NewGuid()), new Account(accountId, "Name"));
+		
 		Assert.False(stateUpdated.Headers.When.Value > DateTimeOffset.UtcNow);
 		Assert.Equal(accountId, stateUpdated.Headers.Who.Id);
 	}

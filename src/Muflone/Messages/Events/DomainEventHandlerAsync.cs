@@ -7,8 +7,7 @@ namespace Muflone.Messages.Events;
 public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync<TEvent>
 	where TEvent : class, IDomainEvent
 {
-	public abstract Task HandleAsync(TEvent @event,
-		CancellationToken cancellationToken = default(CancellationToken));
+	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
 	#region Dispose
 

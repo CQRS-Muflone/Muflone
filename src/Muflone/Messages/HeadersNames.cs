@@ -1,6 +1,6 @@
-﻿namespace Muflone.Messages.Events;
+﻿namespace Muflone.Messages;
 
-public class EventHeadersType
+public class HeadersNames
 {
 	public const string CorrelationId = "CorrelationId";
 	public const string AccountId = "AccountId";

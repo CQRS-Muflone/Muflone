@@ -17,31 +17,31 @@ public sealed class EventHeaders
 
 	public Guid CorrelationId
 	{
-		get => Guid.Parse(Standards[EventHeadersType.CorrelationId]);
-		set => Standards[EventHeadersType.CorrelationId] = value.ToString();
+		get => Guid.Parse(Standards[HeadersNames.CorrelationId]);
+		set => Standards[HeadersNames.CorrelationId] = value.ToString();
 	}
 
 	public Account Who
 	{
-		get => new Account(Standards[EventHeadersType.AccountId],
-			Standards[EventHeadersType.AccountName]);
+		get => new Account(Standards[HeadersNames.AccountId],
+			Standards[HeadersNames.AccountName]);
 		set
 		{
-			Standards[EventHeadersType.AccountId] = value.Id;
-			Standards[EventHeadersType.AccountName] = value.Name;
+			Standards[HeadersNames.AccountId] = value.Id;
+			Standards[HeadersNames.AccountName] = value.Name;
 		}
 	}
 
 	public When When
 	{
-		get => new(long.Parse(Standards[EventHeadersType.When]));
-		set => Standards[EventHeadersType.When] = value.Value.Ticks.ToString();
+		get => new(long.Parse(Standards[HeadersNames.When]));
+		set => Standards[HeadersNames.When] = value.Value.Ticks.ToString();
 	}
 
 	public string AggregateType
 	{
-		get => Standards[EventHeadersType.AggregateType];
-		set => Standards[EventHeadersType.AggregateType] = value;
+		get => Standards[HeadersNames.AggregateType];
+		set => Standards[HeadersNames.AggregateType] = value;
 	}
 
 	public bool ContainsKey(string key)
