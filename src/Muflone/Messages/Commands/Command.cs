@@ -18,29 +18,29 @@ public abstract class Command : ICommand
 	public When When { get; }
 
 	protected Command(IDomainId aggregateId)
-		: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
-			new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
+		: this(aggregateId, NewId.NextGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
+			new When(DateTime.UtcNow))
 	{
 	}
 
 	protected Command(IDomainId aggregateId, Guid commitId)
 		: this(aggregateId, commitId, new Account(NewId.NextGuid().ToString(), "Anonymous"),
-			new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
+			new When(DateTime.UtcNow))
 	{
 	}
 
 	protected Command(IDomainId aggregateId, Account who)
-		: this(aggregateId, Guid.NewGuid(), who, new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
+		: this(aggregateId, NewId.NextGuid(), who, new When(DateTime.UtcNow))
 	{
 	}
 
 	protected Command(IDomainId aggregateId, Account who, When when)
-		: this(aggregateId, Guid.NewGuid(), who, when)
+		: this(aggregateId, NewId.NextGuid(), who, when)
 	{
 	}
 
 	protected Command(IDomainId aggregateId, Guid commitId, Account who)
-		: this(aggregateId, commitId, who, new When(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))
+		: this(aggregateId, commitId, who, new When(DateTime.UtcNow))
 	{
 	}
 
