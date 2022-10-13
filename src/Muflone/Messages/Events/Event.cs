@@ -21,13 +21,13 @@ public class Event : IEvent
 	}
 
 	protected Event(IDomainId aggregateId, Account who = default)
-		: this(aggregateId, Guid.NewGuid(), who, new When(DateTime.UtcNow))
+		: this(aggregateId, Guid.Empty, who, new When(DateTime.UtcNow))
 	{
 	}
 
 
 	protected Event(IDomainId aggregateId)
-		: this(aggregateId, Guid.NewGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
+		: this(aggregateId, Guid.Empty, new Account(NewId.NextGuid().ToString(), "Anonymous"),
 			new When(DateTime.UtcNow))
 	{
 	}
@@ -51,7 +51,7 @@ public class Event : IEvent
 		UserProperties = new Dictionary<string, object>();
 		UserProperties.Add(HeadersNames.CorrelationId, correlationId);
 
-		MessageId = Guid.NewGuid();
+		MessageId = NewId.NextGuid();
 		AggregateId = aggregateId;
 	}
 }

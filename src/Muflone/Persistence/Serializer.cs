@@ -6,7 +6,8 @@ namespace Muflone.Persistence;
 
 public class Serializer : ISerializer
 {
-	public Task<T> DeserializeAsync<T>(string serializedData, CancellationToken cancellationToken = default) where T : class
+	public Task<T> DeserializeAsync<T>(string serializedData, CancellationToken cancellationToken = default)
+		where T : class
 	{
 		var result = JsonConvert.DeserializeObject<T>(serializedData);
 		return Task.FromResult(result);

@@ -2,7 +2,7 @@
 
 namespace Muflone.Messages.Events;
 
-public interface IIntegrationEventHandler:  IDisposable
+public interface IIntegrationEventHandler : IDisposable
 {
 }
 
