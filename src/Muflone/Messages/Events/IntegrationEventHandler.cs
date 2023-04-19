@@ -3,15 +3,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Muflone.Messages.Events;
 
-public abstract class DomainEventHandler<TEvent> : IDomainEventHandler<TEvent> where TEvent : class, IDomainEvent
+public abstract class IntegrationEventHandler<TEvent> : IIntegrationEventHandler<TEvent>
+	where TEvent : IntegrationEvent
 {
 	protected readonly ILoggerFactory LoggerFactory;
 
-    protected DomainEventHandler(ILoggerFactory loggerFactory)
-    {
-      LoggerFactory = loggerFactory;
-    }
-	
+	protected IntegrationEventHandler(ILoggerFactory loggerFactory)
+	{
+		LoggerFactory = loggerFactory;
+	}
+
 	public abstract void Handle(TEvent @event);
 
 	#region Dispose
@@ -29,7 +30,7 @@ public abstract class DomainEventHandler<TEvent> : IDomainEventHandler<TEvent> w
 		GC.SuppressFinalize(this);
 	}
 
-	~DomainEventHandler()
+	~IntegrationEventHandler()
 	{
 		Dispose(false);
 	}
