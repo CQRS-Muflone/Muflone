@@ -32,10 +32,10 @@ public class AggregateVersionException : Exception
 {
   public readonly Guid Id;
   public readonly Type Type;
-  public readonly int AggregateVersion;
-  public readonly int RequestedVersion;
+  public readonly long AggregateVersion;
+  public readonly long RequestedVersion;
 
-  public AggregateVersionException(Guid id, Type type, int aggregateVersion, int requestedVersion)
+  public AggregateVersionException(Guid id, Type type, long aggregateVersion, long requestedVersion)
       : base(
           $"Requested version {requestedVersion} of aggregate '{id}' (type {type.Name}) - aggregate version is {aggregateVersion}")
   {
