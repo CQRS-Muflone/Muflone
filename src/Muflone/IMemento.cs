@@ -4,7 +4,7 @@ namespace Muflone;
 
 public interface IMemento
 {
-	Guid Id { get; set; }
+  Guid Id { get; set; }
 
-	int Version { get; set; }
+  int Version { get; set; }
 }

@@ -1,41 +1,41 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace Muflone.Messages.Events;
 
 public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHandlerAsync<TEvent>
-	where TEvent : IntegrationEvent
+  where TEvent : IntegrationEvent
 {
-	protected readonly ILoggerFactory LoggerFactory;
+  protected readonly ILoggerFactory LoggerFactory;
 
-	protected IntegrationEventHandlerAsync(ILoggerFactory loggerFactory)
-	{
-		LoggerFactory = loggerFactory;
-	}
+  protected IntegrationEventHandlerAsync(ILoggerFactory loggerFactory)
+  {
+    LoggerFactory = loggerFactory;
+  }
 
-	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+  public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
-	#region Dispose
+  #region Dispose
 
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-		}
-	}
+  protected virtual void Dispose(bool disposing)
+  {
+    if (disposing)
+    {
+    }
+  }
 
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
+  public void Dispose()
+  {
+    Dispose(true);
+    GC.SuppressFinalize(this);
+  }
 
-	~IntegrationEventHandlerAsync()
-	{
-		Dispose(false);
-	}
+  ~IntegrationEventHandlerAsync()
+  {
+    Dispose(false);
+  }
 
-	#endregion
+  #endregion
 }

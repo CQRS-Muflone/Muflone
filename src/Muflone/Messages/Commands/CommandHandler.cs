@@ -1,42 +1,42 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
+using System;
 
 namespace Muflone.Messages.Commands;
 
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand> where TCommand : class, ICommand
 {
-	protected readonly IRepository Repository;
-	protected readonly ILogger Logger;
+  protected readonly IRepository Repository;
+  protected readonly ILogger Logger;
 
-	protected CommandHandler(IRepository repository, ILoggerFactory loggerFactory)
-	{
-		Repository = repository ?? throw new ArgumentNullException(nameof(repository));
-		Logger = loggerFactory.CreateLogger(GetType());
-	}
+  protected CommandHandler(IRepository repository, ILoggerFactory loggerFactory)
+  {
+    Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+    Logger = loggerFactory.CreateLogger(GetType());
+  }
 
-	public abstract void Handle(TCommand command);
+  public abstract void Handle(TCommand command);
 
 
-	#region Dispose
+  #region Dispose
 
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-		}
-	}
+  protected virtual void Dispose(bool disposing)
+  {
+    if (disposing)
+    {
+    }
+  }
 
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
+  public void Dispose()
+  {
+    Dispose(true);
+    GC.SuppressFinalize(this);
+  }
 
-	~CommandHandler()
-	{
-		Dispose(false);
-	}
+  ~CommandHandler()
+  {
+    Dispose(false);
+  }
 
-	#endregion
+  #endregion
 }
