@@ -4,5 +4,5 @@ namespace Muflone.Factories;
 
 public interface ICommandHandlerFactory
 {
-	ICommandHandler<T> CreateCommandHandler<T>() where T : class, ICommand;
+  ICommandHandler<T> CreateCommandHandler<T>() where T : class, ICommand;
 }

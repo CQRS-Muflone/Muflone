@@ -1,6 +1,6 @@
-﻿using System;
-using Muflone.Core;
+﻿using Muflone.Core;
 using Muflone.CustomTypes;
+using System;
 
 namespace Muflone.Messages.Events;
 
@@ -11,25 +11,25 @@ namespace Muflone.Messages.Events;
 /// </summary>
 public abstract class DomainEvent : Event, IDomainEvent
 {
-	protected DomainEvent(IDomainId aggregateId, Guid correlationId, Account who = default) : base(aggregateId,
-		correlationId, who)
-	{
-	}
+  protected DomainEvent(IDomainId aggregateId, Guid correlationId, Account who = default) : base(aggregateId,
+    correlationId, who)
+  {
+  }
 
-	protected DomainEvent(IDomainId aggregateId, Account who = default) : base(aggregateId, who)
-	{
-	}
+  protected DomainEvent(IDomainId aggregateId, Account who = default) : base(aggregateId, who)
+  {
+  }
 
-	protected DomainEvent(IDomainId aggregateId) : base(aggregateId)
-	{
-	}
+  protected DomainEvent(IDomainId aggregateId) : base(aggregateId)
+  {
+  }
 
-	protected DomainEvent(IDomainId aggregateId, Guid correlationId) : base(aggregateId, correlationId)
-	{
-	}
+  protected DomainEvent(IDomainId aggregateId, Guid correlationId) : base(aggregateId, correlationId)
+  {
+  }
 
-	protected DomainEvent(IDomainId aggregateId, Guid correlationId, Account who, When when) : base(aggregateId,
-		correlationId, who, when)
-	{
-	}
+  protected DomainEvent(IDomainId aggregateId, Guid correlationId, Account who, When when) : base(aggregateId,
+    correlationId, who, when)
+  {
+  }
 }

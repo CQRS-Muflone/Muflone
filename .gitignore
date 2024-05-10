@@ -109,3 +109,6 @@ Backup*/
 UpgradeLog*.XML
 node_modules/
 .sass-cache/
+
+#CodeRush
+.cr/
