@@ -16,7 +16,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>.NET6 Support, improved messaging part</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

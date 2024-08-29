@@ -11,7 +11,7 @@ public sealed class ConventionEventRouter : IRouteEvents
 
   private readonly bool _throwOnApplyNotFound;
 
-  private IAggregate _registered;
+	private IAggregate _registered = default!;
 
   public ConventionEventRouter()
     : this(true)

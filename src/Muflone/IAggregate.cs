@@ -12,5 +12,5 @@ public interface IAggregate
   ICollection GetUncommittedEvents();
   void ClearUncommittedEvents();
 
-  IMemento GetSnapshot();
+  IMemento? GetSnapshot();
 }
