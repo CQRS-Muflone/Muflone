@@ -4,9 +4,9 @@ namespace Muflone.Core;
 
 public abstract class DomainId : IDomainId, IEquatable<DomainId>
 {
-	public Guid Value { get; }
+	public string Value { get; }
 
-	protected DomainId(Guid value)
+	protected DomainId(string value)
 	{
 		Value = value;
 	}
