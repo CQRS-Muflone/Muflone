@@ -33,9 +33,9 @@ public class ConflictDetector : IDetectConflicts
 	public bool ConflictsWith(IEnumerable<object> uncommittedEvents, IEnumerable<object> committedEvents)
 	{
 		return (from object uncommitted in uncommittedEvents
-							from object committed in committedEvents
-								where Conflicts(uncommitted, committed)
-									select uncommittedEvents).Any();
+						from object committed in committedEvents
+						where Conflicts(uncommitted, committed)
+						select uncommittedEvents).Any();
 	}
 
 	private bool Conflicts(object uncommitted, object committed)

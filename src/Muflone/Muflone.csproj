@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>8.1.0</Version>
+    <Version>8.1.1</Version>
     <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Product>Muflone</Product>
     <Description>A CQRS and event store library</Description>

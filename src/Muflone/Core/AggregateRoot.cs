@@ -47,7 +47,7 @@ public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
 	IMemento? IAggregate.GetSnapshot()
 	{
 		var snapshot = GetSnapshot();
-		
+
 		if (snapshot is null)
 			return null;
 

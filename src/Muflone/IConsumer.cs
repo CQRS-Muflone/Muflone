@@ -25,3 +25,7 @@ public interface ICommandConsumer<in T> : IConsumer where T : Command
 {
 	Task ConsumeAsync(T message, CancellationToken cancellationToken = default);
 }
+
+public interface ICommandSender<in T> : IConsumer where T : Command
+{
+}
