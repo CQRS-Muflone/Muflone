@@ -5,5 +5,5 @@ namespace Muflone.Factories;
 
 public interface IDomainEventHandlerFactoryAsync
 {
-  IEnumerable<IDomainEventHandlerAsync<T>> CreateDomainEventHandlersAsync<T>() where T : class, IDomainEvent;
+	IEnumerable<IDomainEventHandlerAsync<T>> CreateDomainEventHandlersAsync<T>() where T : class, IDomainEvent;
 }
