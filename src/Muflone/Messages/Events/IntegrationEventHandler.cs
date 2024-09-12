@@ -4,36 +4,36 @@ using System;
 namespace Muflone.Messages.Events;
 
 public abstract class IntegrationEventHandler<TEvent> : IIntegrationEventHandler<TEvent>
-  where TEvent : IntegrationEvent
+	where TEvent : IntegrationEvent
 {
-  protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILoggerFactory LoggerFactory;
 
-  protected IntegrationEventHandler(ILoggerFactory loggerFactory)
-  {
-    LoggerFactory = loggerFactory;
-  }
+	protected IntegrationEventHandler(ILoggerFactory loggerFactory)
+	{
+		LoggerFactory = loggerFactory;
+	}
 
-  public abstract void Handle(TEvent @event);
+	public abstract void Handle(TEvent @event);
 
-  #region Dispose
+	#region Dispose
 
-  protected virtual void Dispose(bool disposing)
-  {
-    if (disposing)
-    {
-    }
-  }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+		}
+	}
 
-  public void Dispose()
-  {
-    Dispose(true);
-    GC.SuppressFinalize(this);
-  }
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
 
-  ~IntegrationEventHandler()
-  {
-    Dispose(false);
-  }
+	~IntegrationEventHandler()
+	{
+		Dispose(false);
+	}
 
-  #endregion
+	#endregion
 }

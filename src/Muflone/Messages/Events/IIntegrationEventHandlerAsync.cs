@@ -10,5 +10,5 @@ public interface IIntegrationEventHandlerAsync : IDisposable
 
 public interface IIntegrationEventHandlerAsync<in T> : IIntegrationEventHandlerAsync where T : IIntegrationEvent
 {
-  Task HandleAsync(T @event, CancellationToken cancellationToken = default);
+	Task HandleAsync(T @event, CancellationToken cancellationToken = default);
 }

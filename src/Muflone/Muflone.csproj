@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>8.0.2</Version>
+    <Version>8.1.2</Version>
     <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Product>Muflone</Product>
     <Description>A CQRS and event store library</Description>
@@ -16,7 +16,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>.NET6 Support, improved messaging part</PackageReleaseNotes>
+    <PackageReleaseNotes>Changes Guid to string for IDomainId, moves here IConsumer and creates base interface for ITransporterConnectionFactory
+</PackageReleaseNotes>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

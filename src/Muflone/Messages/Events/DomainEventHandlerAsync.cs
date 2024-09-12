@@ -6,36 +6,36 @@ using System.Threading.Tasks;
 namespace Muflone.Messages.Events;
 
 public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync<TEvent>
-  where TEvent : class, IDomainEvent
+	where TEvent : class, IDomainEvent
 {
-  protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILoggerFactory LoggerFactory;
 
-  protected DomainEventHandlerAsync(ILoggerFactory loggerFactory)
-  {
-    LoggerFactory = loggerFactory;
-  }
+	protected DomainEventHandlerAsync(ILoggerFactory loggerFactory)
+	{
+		LoggerFactory = loggerFactory;
+	}
 
-  public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
-  #region Dispose
+	#region Dispose
 
-  protected virtual void Dispose(bool disposing)
-  {
-    if (disposing)
-    {
-    }
-  }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+		}
+	}
 
-  public void Dispose()
-  {
-    Dispose(true);
-    GC.SuppressFinalize(this);
-  }
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
 
-  ~DomainEventHandlerAsync()
-  {
-    Dispose(false);
-  }
+	~DomainEventHandlerAsync()
+	{
+		Dispose(false);
+	}
 
-  #endregion
+	#endregion
 }

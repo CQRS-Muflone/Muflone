@@ -8,5 +8,5 @@ public interface IIntegrationEventHandler : IDisposable
 
 public interface IIntegrationEventHandler<in T> : IIntegrationEventHandler where T : IIntegrationEvent
 {
-  void Handle(T @event);
+	void Handle(T @event);
 }

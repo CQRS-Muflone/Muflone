@@ -10,5 +10,5 @@ public interface IDomainEventHandlerAsync : IDisposable
 
 public interface IDomainEventHandlerAsync<in TEvent> : IDomainEventHandlerAsync where TEvent : class, IDomainEvent
 {
-  Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+	Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 }

@@ -15,36 +15,34 @@ namespace Muflone.Core;
 /// </remarks>
 public class ConflictDetector : IDetectConflicts
 {
-  //declaring different delegate so that ConflictDelegate(object, object) can be marked obsolete
-  private delegate bool ConflictPredicate(object uncommitted, object committed);
+	//declaring different delegate so that ConflictDelegate(object, object) can be marked obsolete
+	private delegate bool ConflictPredicate(object uncommitted, object committed);
 
-  private readonly IDictionary<Type, IDictionary<Type, ConflictPredicate>> _actions =
-    new Dictionary<Type, IDictionary<Type, ConflictPredicate>>();
+	private readonly IDictionary<Type, IDictionary<Type, ConflictPredicate>> _actions = new Dictionary<Type, IDictionary<Type, ConflictPredicate>>();
 
-  public void Register<TUncommitted, TCommitted>(ConflictDelegate<TUncommitted, TCommitted> handler)
-    where TUncommitted : class
-    where TCommitted : class
-  {
-    if (!_actions.TryGetValue(typeof(TUncommitted), out var inner))
-      _actions[typeof(TUncommitted)] = inner = new Dictionary<Type, ConflictPredicate>();
+	public void Register<TUncommitted, TCommitted>(ConflictDelegate<TUncommitted, TCommitted> handler)
+		where TUncommitted : class
+		where TCommitted : class
+	{
+		if (!_actions.TryGetValue(typeof(TUncommitted), out var inner))
+			_actions[typeof(TUncommitted)] = inner = new Dictionary<Type, ConflictPredicate>();
 
-    inner[typeof(TCommitted)] =
-      (uncommitted, committed) => handler(uncommitted as TUncommitted, committed as TCommitted);
-  }
+		inner[typeof(TCommitted)] = (uncommitted, committed) => handler((TUncommitted)uncommitted, (TCommitted)committed);
+	}
 
-  public bool ConflictsWith(IEnumerable<object> uncommittedEvents, IEnumerable<object> committedEvents)
-  {
-    return (from object uncommitted in uncommittedEvents
-            from object committed in committedEvents
-            where Conflicts(uncommitted, committed)
-            select uncommittedEvents).Any();
-  }
+	public bool ConflictsWith(IEnumerable<object> uncommittedEvents, IEnumerable<object> committedEvents)
+	{
+		return (from object uncommitted in uncommittedEvents
+						from object committed in committedEvents
+						where Conflicts(uncommitted, committed)
+						select uncommittedEvents).Any();
+	}
 
-  private bool Conflicts(object uncommitted, object committed)
-  {
-    if (!_actions.TryGetValue(uncommitted.GetType(), out var registration))
-      return uncommitted.GetType() == committed.GetType(); // no reg, only conflict if the events are the same time
+	private bool Conflicts(object uncommitted, object committed)
+	{
+		if (!_actions.TryGetValue(uncommitted.GetType(), out var registration))
+			return uncommitted.GetType() == committed.GetType(); // no reg, only conflict if the events are the same type
 
-    return !registration.TryGetValue(committed.GetType(), out var callback) || callback(uncommitted, committed);
-  }
+		return !registration.TryGetValue(committed.GetType(), out var callback) || callback(uncommitted, committed);
+	}
 }
