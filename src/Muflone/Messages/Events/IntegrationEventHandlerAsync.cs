@@ -9,10 +9,12 @@ public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHa
 	where TEvent : IntegrationEvent
 {
 	protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILogger Logger;
 
 	protected IntegrationEventHandlerAsync(ILoggerFactory loggerFactory)
 	{
 		LoggerFactory = loggerFactory;
+		Logger = loggerFactory.CreateLogger(GetType());
 	}
 
 	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);

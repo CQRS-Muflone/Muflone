@@ -7,10 +7,12 @@ public abstract class IntegrationEventHandler<TEvent> : IIntegrationEventHandler
 	where TEvent : IntegrationEvent
 {
 	protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILogger Logger;
 
 	protected IntegrationEventHandler(ILoggerFactory loggerFactory)
 	{
 		LoggerFactory = loggerFactory;
+		Logger = loggerFactory.CreateLogger(GetType());
 	}
 
 	public abstract void Handle(TEvent @event);
