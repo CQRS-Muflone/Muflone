@@ -9,10 +9,12 @@ public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync
 	where TEvent : class, IDomainEvent
 {
 	protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILogger Logger;
 
 	protected DomainEventHandlerAsync(ILoggerFactory loggerFactory)
 	{
 		LoggerFactory = loggerFactory;
+		Logger = loggerFactory.CreateLogger(GetType());
 	}
 
 	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);

@@ -6,10 +6,12 @@ namespace Muflone.Messages.Events;
 public abstract class DomainEventHandler<TEvent> : IDomainEventHandler<TEvent> where TEvent : class, IDomainEvent
 {
 	protected readonly ILoggerFactory LoggerFactory;
+	protected readonly ILogger Logger;
 
 	protected DomainEventHandler(ILoggerFactory loggerFactory)
 	{
 		LoggerFactory = loggerFactory;
+		Logger = loggerFactory.CreateLogger(GetType());
 	}
 
 	public abstract void Handle(TEvent @event);
