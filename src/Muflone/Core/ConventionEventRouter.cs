@@ -20,7 +20,7 @@ public sealed class ConventionEventRouter : IRouteEvents
 
 	public ConventionEventRouter(bool throwOnApplyNotFound)
 	{
-		this._throwOnApplyNotFound = throwOnApplyNotFound;
+		_throwOnApplyNotFound = throwOnApplyNotFound;
 	}
 
 	public ConventionEventRouter(bool throwOnApplyNotFound, IAggregate aggregate)

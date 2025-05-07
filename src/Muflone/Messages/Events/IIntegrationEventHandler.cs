@@ -1,12 +1,9 @@
-﻿using System;
+﻿namespace Muflone.Messages.Events;
 
-namespace Muflone.Messages.Events;
-
-public interface IIntegrationEventHandler : IDisposable
+public interface IIntegrationEventHandler : IMessageHandler
 {
 }
 
 public interface IIntegrationEventHandler<in T> : IIntegrationEventHandler where T : IIntegrationEvent
 {
-	void Handle(T @event);
 }

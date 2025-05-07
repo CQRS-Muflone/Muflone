@@ -19,7 +19,6 @@ public abstract class CommandHandlerAsync<TCommand> : ICommandHandlerAsync<TComm
 
 	public abstract Task HandleAsync(TCommand command, CancellationToken cancellationToken = new());
 
-
 	#region Dispose
 
 	protected virtual void Dispose(bool disposing)

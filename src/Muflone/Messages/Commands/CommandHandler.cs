@@ -17,7 +17,6 @@ public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand> where
 
 	public abstract void Handle(TCommand command);
 
-
 	#region Dispose
 
 	protected virtual void Dispose(bool disposing)
