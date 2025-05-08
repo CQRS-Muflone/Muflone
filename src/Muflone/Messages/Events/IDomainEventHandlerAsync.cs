@@ -4,6 +4,7 @@ public interface IDomainEventHandlerAsync : IMessageHandlerAsync
 {
 }
 
-public interface IDomainEventHandlerAsync<TEvent> : IMessageHandlerAsync<TEvent> where TEvent : class, IDomainEvent
+public interface IDomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync, IMessageHandlerAsync<TEvent>
+    where TEvent : class, IDomainEvent
 {
 }

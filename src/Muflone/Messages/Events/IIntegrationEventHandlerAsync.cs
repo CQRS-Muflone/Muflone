@@ -4,6 +4,6 @@ public interface IIntegrationEventHandlerAsync : IMessageHandler
 {
 }
 
-public interface IIntegrationEventHandlerAsync<T> : IMessageHandlerAsync<T> where T : IIntegrationEvent
+public interface IIntegrationEventHandlerAsync<T> : IIntegrationEventHandler, IMessageHandlerAsync<T> where T : IIntegrationEvent
 {
 }

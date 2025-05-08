@@ -22,8 +22,10 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 
     public void RegisterHandlers(Type consumerType, HandlerConfiguration? configuration = null)
     {
-        if (!consumerType.IsAssignableTo(typeof(IMessageHandler)))
-            throw new NotSupportedException($"The consumer type must implement {nameof(IMessageHandler)} interface");
+        // if (!consumerType.IsAssignableTo(typeof(IMessageHandler)) || !consumerType.IsAssignableTo(typeof(IMessageHandlerAsync)))
+        //     throw new NotSupportedException($"The consumer type must implement {nameof(IMessageHandler)} or {nameof(IMessageHandlerAsync)} interface");
+        if (!consumerType.IsAssignableTo(typeof(IMessageHandlerAsync)))
+            throw new NotSupportedException($"The consumer type must implement {nameof(IMessageHandlerAsync)} interface");
 
         RegisterCommandHandlers(consumerType, null, configuration);
         RegisterDomainEventHandlers(consumerType, null, configuration);
