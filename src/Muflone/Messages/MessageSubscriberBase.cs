@@ -130,6 +130,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
         HandlerSubscription<TChannel> handlerSubscription = new(
             consumerType.Name,
             eventName,
+            typeof(T),
             configuration,
             Callback,
             consumerInstance == null,
@@ -162,7 +163,8 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
         IMessageHandlerAsync<T>? handlerConsumerInstance;
         if (consumerInstance == null)
         {
-            handlerConsumerInstance = (IMessageHandlerAsync<T>)_serviceProvider!.GetRequiredService(consumerType);
+            using var scope = _serviceProvider!.CreateScope();
+            handlerConsumerInstance = (IMessageHandlerAsync<T>)scope.ServiceProvider!.GetRequiredService(consumerType);
         }
         else
         {

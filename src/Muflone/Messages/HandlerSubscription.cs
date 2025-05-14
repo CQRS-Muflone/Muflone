@@ -7,6 +7,7 @@ namespace Muflone.Messages;
 public sealed class HandlerSubscription<T>(
     string consumerTypeName,
     string eventTypeName,
+    Type eventType,
     HandlerConfiguration? configuration,
     Func<string, CancellationToken, Task> messageAsync,
     bool isSingletonHandler,
@@ -17,7 +18,9 @@ public sealed class HandlerSubscription<T>(
 {
     public string HandlerSubscriptionId { get; } = configuration?.InstanceId ?? Guid.NewGuid().ToString();
 
+    public string ConsumerTypeName { get; } = consumerTypeName;
     public string EventTypeName { get; } = eventTypeName;
+    public Type EventType { get; } = eventType;
     public HandlerConfiguration? Configuration { get; } = configuration;
     public bool IsCommandHandler { get; } = isCommandHandler;
     public bool IsDomainEventHandler { get; } = isDomainEventHandler;

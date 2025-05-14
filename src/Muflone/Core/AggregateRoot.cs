@@ -26,7 +26,7 @@ public abstract class AggregateRoot : IAggregate, IEquatable<IAggregate>
 
 	protected IRouteEvents RegisteredRoutes
 	{
-		get => _registeredRoutes;
+		get => _registeredRoutes ??= new ConventionEventRouter(true, this);
 		set => _registeredRoutes =
 			value ?? throw new InvalidOperationException("AggregateRoot must have an event router to function");
 	}

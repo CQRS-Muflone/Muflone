@@ -12,7 +12,7 @@ public static class MessageHandlerExtension
     public static IServiceCollection AddMessageHandler<T>(this IServiceCollection services)
     {
         HandlersTypeList.Add(typeof(T));
-        services.AddSingleton(typeof(T));
+        services.AddScoped(typeof(T));
         return services;
     }
 }
