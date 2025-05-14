@@ -128,10 +128,10 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 				consumerType.Name,
 				eventName,
 				typeof(T),
-				configuration,
-				Callback,
-				consumerInstance == null,
-				isCommand, isDomainEvent, isIntegrationEvent);
+            configuration,
+            Callback,
+            consumerInstance == null,
+            isCommand, isDomainEvent, isIntegrationEvent);
 
 		_consumersList.Add(handlerSubscription);
 	}
