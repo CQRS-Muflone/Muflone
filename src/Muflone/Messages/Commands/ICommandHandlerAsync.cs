@@ -4,6 +4,6 @@ public interface ICommandHandlerAsync : IMessageHandlerAsync
 {
 }
 
-public interface ICommandHandlerAsync<TCommand> : IMessageHandlerAsync<TCommand> where TCommand : class, ICommand
+public interface ICommandHandlerAsync<TCommand> : ICommandHandlerAsync, IMessageHandlerAsync<TCommand> where TCommand : class, ICommand
 {
 }
