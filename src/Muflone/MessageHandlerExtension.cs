@@ -8,10 +8,10 @@ namespace Muflone;
 
 public static class MessageHandlerExtension
 {
-    private static readonly List<Type> HandlersTypeList = [];
-    public static Type[] HandlersTypeReadOnlyList => HandlersTypeList.ToArray();
+	private static readonly List<Type> HandlersTypeList = [];
+	public static Type[] HandlersTypeReadOnlyList => HandlersTypeList.ToArray();
 
-    /// <summary>
+	/// <summary>
     /// Register a command handler
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -51,9 +51,9 @@ public static class MessageHandlerExtension
     /// <param name="services"></param>
     /// <returns></returns>
     public static IServiceCollection AddGenericHandler<T>(this IServiceCollection services)
-    {
-        HandlersTypeList.Add(typeof(T));
-        services.AddScoped(typeof(T));
-        return services;
-    }
+	{
+		HandlersTypeList.Add(typeof(T));
+		services.AddScoped(typeof(T));
+		return services;
+	}
 }
