@@ -1,9 +1,9 @@
 ﻿namespace Muflone.Messages.Events;
 
-public interface IIntegrationEventHandlerAsync : IMessageHandler
+public interface IIntegrationEventHandlerAsync : IMessageHandlerAsync
 {
 }
 
-public interface IIntegrationEventHandlerAsync<T> : IIntegrationEventHandler, IMessageHandlerAsync<T> where T : IIntegrationEvent
+public interface IIntegrationEventHandlerAsync<T> : IIntegrationEventHandlerAsync, IMessageHandlerAsync<T> where T : IIntegrationEvent
 {
 }
