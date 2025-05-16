@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events;
 
-public abstract class DomainEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) 
-	: IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
+public abstract class DomainEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) : IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
 {
 	protected readonly ILoggerFactory LoggerFactory = loggerFactory;
 
