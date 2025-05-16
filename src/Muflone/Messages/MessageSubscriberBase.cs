@@ -162,7 +162,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 			IMessageHandlerAsync<T> handlerConsumerInstance;
 			if (consumerInstance == null)
 			{
-				using var scope = _serviceProvider!.CreateScope();
+				var scope = _serviceProvider!.CreateScope();
 				handlerConsumerInstance = (IMessageHandlerAsync<T>)scope.ServiceProvider.GetRequiredService(consumerType);
 			}
 			else
