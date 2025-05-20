@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Muflone.Messages.Commands;
 
-namespace Muflone.Messages.Commands;
-
-public interface ICommandHandlerAsync : IDisposable
+public interface ICommandHandlerAsync : IMessageHandlerAsync
 {
 }
 
-public interface ICommandHandlerAsync<in TCommand> : ICommandHandlerAsync where TCommand : class, ICommand
+public interface ICommandHandlerAsync<TCommand> : ICommandHandlerAsync, IMessageHandlerAsync<TCommand> where TCommand : class, ICommand
 {
-	Task HandleAsync(TCommand command, CancellationToken cancellationToken = default);
 }

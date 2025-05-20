@@ -5,17 +5,9 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events;
 
-public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHandlerAsync<TEvent>
-	where TEvent : IntegrationEvent
+public abstract class IntegrationEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) : IIntegrationEventHandlerAsync<TEvent> where TEvent : IntegrationEvent
 {
-	protected readonly ILoggerFactory LoggerFactory;
-	protected readonly ILogger Logger;
-
-	protected IntegrationEventHandlerAsync(ILoggerFactory loggerFactory)
-	{
-		LoggerFactory = loggerFactory;
-		Logger = loggerFactory.CreateLogger(GetType());
-	}
+	protected readonly ILoggerFactory LoggerFactory = loggerFactory;
 
 	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
