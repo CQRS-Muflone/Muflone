@@ -15,7 +15,7 @@ namespace Muflone.Messages;
 public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFactory, IServiceProvider serviceProvider) : IMessageSubscriber where TChannel : class
 {
 	private readonly IServiceProvider? _serviceProvider = serviceProvider;
-	//With .NET10 we will move to IEnumrable and use the .Add(). We do not like Concat() :D
+	//With .NET10 we will move to IEnumerable and use the .Add(). We do not like Concat() :D
 	private readonly IList<HandlerSubscription<TChannel>> _consumersList = [];
 	private readonly ILogger _logger = loggerFactory.CreateLogger(typeof(MessageSubscriberBase<TChannel>));
 
