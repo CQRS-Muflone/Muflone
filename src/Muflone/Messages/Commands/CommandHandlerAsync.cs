@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Commands;
 
-public abstract class CommandHandlerAsync<TCommand>(IRepository repository, ILoggerFactory loggerFactory) 
+public abstract class CommandHandlerAsync<TCommand> 
 	: ICommandHandlerAsync<TCommand> where TCommand : class, ICommand
 {
-	protected readonly IRepository Repository = repository;
-	protected readonly ILogger Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
+	protected readonly IRepository Repository;
+	protected readonly ILogger Logger;
+
+	public CommandHandlerAsync(IRepository repository, ILoggerFactory loggerFactory)
+	{
+		Repository = repository;
+		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
+	}
+	
+	public CommandHandlerAsync(ILoggerFactory loggerFactory)
+	{
+		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
+	}
 
 	public abstract Task HandleAsync(TCommand command, CancellationToken cancellationToken = new());
 

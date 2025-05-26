@@ -27,6 +27,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 		RegisterCommandHandlers(consumerType, null, configuration);
 		RegisterDomainEventHandlers(consumerType, null, configuration);
 		RegisterIntegrationEventHandlers(consumerType, null, configuration);
+		RegisterGenericEventHandlers(consumerType, null, configuration);
 	}
 
 	public void RegisterHandlers(IMessageHandlerAsync consumer, HandlerConfiguration? configuration = null)
@@ -35,6 +36,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 		RegisterCommandHandlers(consumerType, consumer, configuration);
 		RegisterDomainEventHandlers(consumerType, consumer, configuration);
 		RegisterIntegrationEventHandlers(consumerType, consumer, configuration);
+		RegisterGenericEventHandlers(consumerType, consumer, configuration);
 	}
 
 	private void RegisterCommandHandlers(Type consumerType, object? consumerInstance,
@@ -53,6 +55,14 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 			HandlerConfiguration? configuration = null)
 	{
 		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IIntegrationEventHandlerAsync), nameof(AddIntegrationEventConsumers), configuration);
+	}
+	
+	private void RegisterGenericEventHandlers(Type consumerType, object? consumerInstance,
+		HandlerConfiguration? configuration = null)
+	{
+		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IMessageHandlerAsync),
+			nameof(AddGenericConsumers),
+			configuration);
 	}
 
 	private void CommonRegisterHandlers(Type consumerType, object? consumerInstance, Type handlerInterfaceType,
@@ -92,6 +102,13 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 			where T : IntegrationEvent
 	{
 		RegisterHandlerConsumer<T>(consumerType, consumerInstance, configuration, isIntegrationEvent: true);
+	}
+	
+	protected void AddGenericConsumers<T>(Type consumerType, object? consumerInstance,
+		HandlerConfiguration? configuration = null)
+		where T : class, IMessage
+	{
+		RegisterHandlerConsumer<T>(consumerType, consumerInstance, configuration);
 	}
 
 	private void RegisterHandlerConsumer<T>(Type consumerType, object? consumerInstance,
