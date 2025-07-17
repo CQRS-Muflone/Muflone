@@ -16,7 +16,7 @@ public class RegistrationEventRouter : IRouteEvents
 
 	public virtual void Register(IAggregate aggregate)
 	{
-		_regsitered = aggregate ?? throw new ArgumentNullException("aggregate");
+		_regsitered = aggregate ?? throw new ArgumentNullException(nameof(aggregate));
 	}
 
 	public virtual void Dispatch(object eventMessage)

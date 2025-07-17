@@ -40,25 +40,19 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 	private void RegisterCommandHandlers(Type consumerType, object? consumerInstance,
 			HandlerConfiguration? configuration = null)
 	{
-		CommonRegisterHandlers(consumerType, consumerInstance, typeof(ICommandHandlerAsync),
-				nameof(AddCommandConsumer),
-				configuration);
+		CommonRegisterHandlers(consumerType, consumerInstance, typeof(ICommandHandlerAsync), nameof(AddCommandConsumer), configuration);
 	}
 
 	private void RegisterDomainEventHandlers(Type consumerType, object? consumerInstance,
 			HandlerConfiguration? configuration = null)
 	{
-		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IDomainEventHandlerAsync),
-				nameof(AddDomainEventConsumers),
-				configuration);
+		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IDomainEventHandlerAsync), nameof(AddDomainEventConsumers), configuration);
 	}
 
 	private void RegisterIntegrationEventHandlers(Type consumerType, object? consumerInstance,
 			HandlerConfiguration? configuration = null)
 	{
-		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IIntegrationEventHandlerAsync),
-				nameof(AddIntegrationEventConsumers),
-				configuration);
+		CommonRegisterHandlers(consumerType, consumerInstance, typeof(IIntegrationEventHandlerAsync), nameof(AddIntegrationEventConsumers), configuration);
 	}
 
 	private void CommonRegisterHandlers(Type consumerType, object? consumerInstance, Type handlerInterfaceType,
@@ -117,9 +111,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError(
-						$"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded",
-						ex);
+				_logger.LogError($"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded", ex);
 			}
 		}
 
@@ -147,8 +139,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(
-					$"Error while deserializing message of type {typeof(T).Name}. The message will be discarded", ex);
+			_logger.LogError($"Error while deserializing message of type {typeof(T).Name}. The message will be discarded", ex);
 		}
 
 		return null;
