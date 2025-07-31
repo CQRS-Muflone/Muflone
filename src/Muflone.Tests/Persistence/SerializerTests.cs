@@ -18,30 +18,41 @@ namespace Muflone.Tests.Persistence
 			}
 		}
 
+		private class ImageId : DomainId
+		{
+			public ImageId(string value) : base(value)
+			{
+			}
+		}
+
 		private class TestEvent : DomainEvent
 		{
 			public string StringProperty { get; }
 			public int IntProperty { get; }
 			public Guid GuidProperty { get; }
 			public DateTime DateTimeProperty { get; }
+			// Aggiungiamo una nuova proprietà di tipo IDomainId
+			public IDomainId? ImageId { get; }
 
 			[JsonConstructor]
-			public TestEvent(TestId aggregateId, string stringProperty, int intProperty, Guid guidProperty, DateTime dateTimeProperty)
+			public TestEvent(TestId aggregateId, string stringProperty, int intProperty, Guid guidProperty, DateTime dateTimeProperty, ImageId? imageId = null)
 					: base(aggregateId)
 			{
 				StringProperty = stringProperty;
 				IntProperty = intProperty;
 				GuidProperty = guidProperty;
 				DateTimeProperty = dateTimeProperty;
+				ImageId = imageId;
 			}
 
-			public TestEvent(TestId aggregateId, string stringProperty, int intProperty, Guid guidProperty, DateTime dateTimeProperty, Account who)
+			public TestEvent(TestId aggregateId, string stringProperty, int intProperty, Guid guidProperty, DateTime dateTimeProperty, Account who, ImageId? imageId = null)
 					: base(aggregateId, who)
 			{
 				StringProperty = stringProperty;
 				IntProperty = intProperty;
 				GuidProperty = guidProperty;
 				DateTimeProperty = dateTimeProperty;
+				ImageId = imageId;
 			}
 		}
 
@@ -76,6 +87,76 @@ namespace Muflone.Tests.Persistence
 			Assert.Equal(originalEvent.GuidProperty, deserialized.GuidProperty);
 			Assert.Equal(originalEvent.DateTimeProperty.ToUniversalTime().ToString("o"),
 									 deserialized.DateTimeProperty.ToUniversalTime().ToString("o"));
+		}
+
+		[Fact]
+		public async Task Serializer_WithTypeNameHandling_CanDeserializeMultipleDomainIds()
+		{
+			// Arrange
+			var serializer = new Serializer();
+			var aggregateId = new TestId(Guid.NewGuid().ToString());
+			var imageId = new ImageId(Guid.NewGuid().ToString());
+			var originalEvent = new TestEvent(aggregateId, "TestString", 42, Guid.NewGuid(), DateTime.UtcNow, imageId);
+
+			// Act
+			var serialized = await serializer.SerializeAsync(originalEvent);
+			// Assert: Il JSON serializzato ora contiene le informazioni sul tipo ($type)
+			Assert.Contains("Muflone.Tests.Persistence.SerializerTests+TestId", serialized);
+			Assert.Contains("Muflone.Tests.Persistence.SerializerTests+ImageId", serialized);
+
+			var deserialized = await serializer.DeserializeAsync<TestEvent>(serialized);
+
+			// Assert
+			Assert.NotNull(deserialized);
+			Assert.IsType<TestId>(deserialized.AggregateId);
+			Assert.Equal(originalEvent.AggregateId.Value, deserialized.AggregateId.Value);
+
+			Assert.NotNull(deserialized.ImageId);
+			Assert.IsType<ImageId>(deserialized.ImageId);
+			Assert.Equal(originalEvent.ImageId.Value, deserialized.ImageId.Value);
+		}
+
+		[Fact]
+		public async Task Serializer_IsBackwardCompatible_WithOldJsonFormat()
+		{
+			// Arrange
+			var serializer = new Serializer();
+			var aggregateIdValue = Guid.NewGuid().ToString();
+			// Questo è un esempio di JSON come sarebbe stato salvato in produzione (senza $type)
+			var oldJson = $@"{{
+                ""StringProperty"": ""OldEvent"",
+                ""IntProperty"": 101,
+                ""GuidProperty"": ""{Guid.NewGuid()}"",
+                ""DateTimeProperty"": ""{DateTime.UtcNow:o}"",
+                ""ImageId"": null,
+                ""AggregateId"": {{
+                    ""Value"": ""{aggregateIdValue}"",
+                }},
+                ""Headers"": {{
+                    ""Standards"": {{
+                        ""CorrelationId"": ""{Guid.NewGuid()}"",
+                        ""AccountId"": ""legacy-user"",
+                        ""Who"": ""Legacy User"",
+                        ""When"": ""{DateTime.UtcNow.Ticks}"",
+                        ""AggregateType"": ""TestEvent""
+                    }},
+                    ""Customs"": {{}}
+                }},
+                ""Version"": 1,
+                ""MessageId"": ""{Guid.NewGuid()}"",
+            }}";
+
+			// Act
+			var deserialized = await serializer.DeserializeAsync<TestEvent>(oldJson);
+
+			// Assert
+			Assert.NotNull(deserialized);
+			// Poiché il vecchio JSON non ha $type, il deserializzatore si basa sul tipo concreto
+			// nel costruttore [JsonConstructor], che è TestId.
+			Assert.IsType<TestId>(deserialized.AggregateId);
+			Assert.Equal(aggregateIdValue, deserialized.AggregateId.Value);
+			Assert.Equal("OldEvent", deserialized.StringProperty);
+			Assert.Equal(101, deserialized.IntProperty);
 		}
 
 		[Fact]
