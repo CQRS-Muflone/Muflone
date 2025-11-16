@@ -34,8 +34,10 @@ class Serializer implements ISerializer
         foreach ($data as $key => $value) {
             if ($reflection->hasProperty($key)) {
                 $property = $reflection->getProperty($key);
-                $property->setAccessible(true);
-                $property->setValue($instance, $this->deserializeValue($value));
+                if (!$property->isInitialized($instance) || !$property->isReadOnly()) {
+                    $property->setAccessible(true);
+                    $property->setValue($instance, $this->deserializeValue($value));
+                }
             }
         }
 

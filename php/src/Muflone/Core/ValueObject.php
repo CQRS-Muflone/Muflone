@@ -52,7 +52,10 @@ abstract class ValueObject
     {
         $hash = 1;
         foreach ($this->getEqualityComponents() as $component) {
-            $hash = $hash * 23 + ($component !== null ? hash('sha256', serialize($component)) : 0);
+            if ($component !== null) {
+                $componentHash = crc32(serialize($component));
+                $hash = $hash * 23 + $componentHash;
+            }
         }
         return (string) $hash;
     }

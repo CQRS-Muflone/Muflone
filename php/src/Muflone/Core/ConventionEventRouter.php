@@ -53,12 +53,23 @@ final class ConventionEventRouter implements IRouteEvents
         $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED);
 
         foreach ($methods as $method) {
-            if ($method->getName() === 'apply' && $method->getNumberOfParameters() === 1) {
+            $methodName = $method->getName();
+
+            // Look for methods named 'apply' or 'applyEventClassName'
+            if (($methodName === 'apply' || str_starts_with($methodName, 'apply'))
+                && $method->getNumberOfParameters() === 1) {
                 $parameters = $method->getParameters();
                 $type = $parameters[0]->getType();
 
                 if ($type !== null && !$type->isBuiltin()) {
                     $typeName = $type->getName();
+
+                    // For apply methods, determine the event type from the parameter
+                    if ($methodName === 'apply') {
+                        // Skip the generic dispatcher - we'll use specific applyXXX methods
+                        continue;
+                    }
+
                     $this->handlers[$typeName] = function (object $event) use ($aggregate, $method) {
                         $method->setAccessible(true);
                         $method->invoke($aggregate, $event);
