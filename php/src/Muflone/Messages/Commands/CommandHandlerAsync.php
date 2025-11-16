@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Muflone\Messages\Commands;
 
+use Muflone\Messages\IMessage;
 use Muflone\Persistence\IRepository;
 use Psr\Log\LoggerInterface;
 
@@ -23,8 +24,8 @@ abstract class CommandHandlerAsync implements ICommandHandlerAsync
     /**
      * Handle the command asynchronously
      *
-     * @param TCommand $command
+     * @param ICommand $command
      * @return void
      */
-    abstract public function handleAsync(ICommand $command): void;
+    abstract public function handleAsync(IMessage $command): void;
 }

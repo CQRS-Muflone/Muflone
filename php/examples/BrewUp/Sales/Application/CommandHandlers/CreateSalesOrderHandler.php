@@ -7,7 +7,7 @@ namespace BrewUp\Sales\Application\CommandHandlers;
 use BrewUp\Sales\Domain\SalesOrder;
 use BrewUp\Sales\SharedKernel\Commands\CreateSalesOrder;
 use Muflone\Messages\Commands\CommandHandlerAsync;
-use Muflone\Messages\Commands\ICommand;
+use Muflone\Messages\IMessage;
 use Muflone\Persistence\IRepository;
 use Psr\Log\LoggerInterface;
 
@@ -26,7 +26,7 @@ final class CreateSalesOrderHandler extends CommandHandlerAsync
         parent::__construct($repository, $logger);
     }
 
-    public function handleAsync(ICommand $command): void
+    public function handleAsync(IMessage $command): void
     {
         assert($command instanceof CreateSalesOrder);
 

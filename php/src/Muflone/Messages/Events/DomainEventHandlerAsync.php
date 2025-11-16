@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Muflone\Messages\Events;
 
+use Muflone\Messages\IMessage;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -21,8 +22,8 @@ abstract class DomainEventHandlerAsync implements IDomainEventHandlerAsync
     /**
      * Handle the domain event asynchronously
      *
-     * @param TEvent $event
+     * @param IDomainEvent $event
      * @return void
      */
-    abstract public function handleAsync(IDomainEvent $event): void;
+    abstract public function handleAsync(IMessage $event): void;
 }

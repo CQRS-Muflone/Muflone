@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Muflone\Messages\Events;
 
+use Muflone\Messages\IMessage;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -21,8 +22,8 @@ abstract class IntegrationEventHandlerAsync implements IIntegrationEventHandlerA
     /**
      * Handle the integration event asynchronously
      *
-     * @param TEvent $event
+     * @param IIntegrationEvent $event
      * @return void
      */
-    abstract public function handleAsync(IIntegrationEvent $event): void;
+    abstract public function handleAsync(IMessage $event): void;
 }
