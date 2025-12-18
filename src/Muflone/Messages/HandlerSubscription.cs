@@ -22,9 +22,9 @@ public sealed class HandlerSubscription<T>(
     public string EventTypeName { get; } = eventTypeName;
     public Type EventType { get; } = eventType;
     public HandlerConfiguration? Configuration { get; } = configuration;
-    // public bool IsCommandHandler { get; } = isCommandHandler;
-    // public bool IsDomainEventHandler { get; } = isDomainEventHandler;
-    // public bool IsIntegrationEventHandler { get; } = isIntegrationEventHandler;
+    public bool IsCommandHandler { get; } = isCommandHandler;
+    public bool IsDomainEventHandler { get; } = isDomainEventHandler;
+    public bool IsIntegrationEventHandler { get; } = isIntegrationEventHandler;
 
     public Func<string, CancellationToken, Task> MessageAsync { get; } = messageAsync;
     public bool IsSingletonHandler { get; } = isSingletonHandler;
