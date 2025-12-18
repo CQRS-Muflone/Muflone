@@ -83,7 +83,7 @@ namespace Muflone.Tests.Core
 
 			// Assert
 			Assert.Contains("Handler not found", exception.Message);
-			Assert.Contains(eventTypeName, exception.Message);
+			Assert.Contains(eventTypeName!, exception.Message);
 		}
 	}
 }

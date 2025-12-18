@@ -10,6 +10,14 @@ public abstract class IntegrationEventHandlerAsync<TEvent>(ILoggerFactory logger
 	protected readonly ILoggerFactory LoggerFactory = loggerFactory;
 
 	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+	
+	public Guid GetCorrelationId(TEvent @event)
+	{
+		@event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
+		return correlationId != null ? 
+			Guid.Parse(correlationId.ToString()!) 
+			: Guid.Empty;
+	}
 
 	#region Dispose
 

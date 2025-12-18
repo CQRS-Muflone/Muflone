@@ -9,13 +9,14 @@ namespace Muflone.Messages.Commands;
 /// <summary>
 /// A command is an imperative instruction to do something. We expect only one receiver of a command because it is point-to-point
 /// </summary>
-public abstract class Command : ICommand
+public abstract class Command(IDomainId aggregateId, Guid commitId, Account who, When when)
+	: ICommand
 {
-	public IDomainId AggregateId { get; set; }
-	public Guid MessageId { get; set; }
-	public Dictionary<string, object> UserProperties { get; set; }
-	public Account Who { get; }
-	public When When { get; }
+	public IDomainId AggregateId { get; set; } = aggregateId;
+	public Guid MessageId { get; set; } = commitId;
+	public Dictionary<string, object> UserProperties { get; set; } = new();
+	public Account Who { get; } = who;
+	public When When { get; } = when;
 
 	protected Command(IDomainId aggregateId)
 		: this(aggregateId, NewId.NextGuid(), new Account(NewId.NextGuid().ToString(), "Anonymous"),
@@ -42,14 +43,5 @@ public abstract class Command : ICommand
 	protected Command(IDomainId aggregateId, Guid commitId, Account who)
 		: this(aggregateId, commitId, who, new When(DateTime.UtcNow))
 	{
-	}
-
-	protected Command(IDomainId aggregateId, Guid commitId, Account who, When when)
-	{
-		AggregateId = aggregateId;
-		MessageId = commitId;
-		UserProperties = new Dictionary<string, object>();
-		Who = who;
-		When = when;
 	}
 }

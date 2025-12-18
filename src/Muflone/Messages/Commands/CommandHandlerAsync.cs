@@ -12,13 +12,13 @@ public abstract class CommandHandlerAsync<TCommand>
 	protected readonly IRepository Repository;
 	protected readonly ILogger Logger;
 
-	public CommandHandlerAsync(IRepository repository, ILoggerFactory loggerFactory)
+	protected CommandHandlerAsync(IRepository repository, ILoggerFactory loggerFactory)
 	{
 		Repository = repository;
 		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
 	}
-	
-	public CommandHandlerAsync(ILoggerFactory loggerFactory)
+
+	protected CommandHandlerAsync(ILoggerFactory loggerFactory)
 	{
 		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
 	}
