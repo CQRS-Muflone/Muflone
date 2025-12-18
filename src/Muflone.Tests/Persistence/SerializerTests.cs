@@ -113,7 +113,7 @@ namespace Muflone.Tests.Persistence
 
 			Assert.NotNull(deserialized.ImageId);
 			Assert.IsType<ImageId>(deserialized.ImageId);
-			Assert.Equal(originalEvent.ImageId.Value, deserialized.ImageId.Value);
+			Assert.Equal(originalEvent.ImageId!.Value, deserialized.ImageId.Value);
 		}
 
 		[Fact]
@@ -192,7 +192,7 @@ namespace Muflone.Tests.Persistence
 			var deserialized = await serializer.DeserializeAsync<TestEvent>(serialized);
 
 			// Assert
-			Assert.Equal(messageId, deserialized.MessageId);
+			Assert.Equal(messageId, deserialized!.MessageId);
 		}
 
 		[Fact]
@@ -212,7 +212,7 @@ namespace Muflone.Tests.Persistence
 			var deserialized = await serializer.DeserializeAsync<TestEvent>(serialized);
 
 			// Assert
-			Assert.Equal("CustomValue", deserialized.UserProperties["CustomKey"]);
+			Assert.Equal("CustomValue", deserialized!.UserProperties["CustomKey"]);
 			Assert.Equal(100L, Convert.ToInt64(deserialized.UserProperties["NumericProperty"])); // JSON serialization may change numeric types
 		}
 	}

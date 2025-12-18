@@ -1,6 +1,5 @@
-﻿namespace Muflone
+﻿namespace Muflone;
+
+public interface ITransporterConnectionFactory
 {
-	public interface ITransporterConnectionFactory
-	{
-	}
 }
