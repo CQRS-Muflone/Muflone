@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>10.0.2-beta</Version>
+    <Version>10.0.2</Version>
     <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Product>Muflone</Product>
     <Description>A CQRS and event store library</Description>
