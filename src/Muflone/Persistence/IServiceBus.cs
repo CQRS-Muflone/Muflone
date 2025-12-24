@@ -6,5 +6,5 @@ namespace Muflone.Persistence;
 
 public interface IServiceBus
 {
-	Task SendAsync<T>(T command, CancellationToken cancellationToken = default) where T : class, ICommand;
+    Task SendAsync<T>(T command, CancellationToken cancellationToken = default) where T : class, ICommand;
 }

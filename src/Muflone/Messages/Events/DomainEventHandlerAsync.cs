@@ -5,18 +5,23 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events;
 
-public abstract class DomainEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) : IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
+public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
 {
-	protected readonly ILoggerFactory LoggerFactory = loggerFactory;
+	protected readonly ILogger Logger;
+
+	protected DomainEventHandlerAsync(ILoggerFactory loggerFactory)
+	{
+		Logger = loggerFactory.CreateLogger(typeof(DomainEventHandlerAsync<TEvent>));
+	}
 
 	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
-	
+
 	public Guid GetCorrelationId(TEvent @event)
 	{
 		@event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
-		return correlationId != null ? 
-			Guid.Parse(correlationId.ToString()!) 
-			: Guid.Empty;
+		return correlationId != null ?
+				Guid.Parse(correlationId.ToString()!)
+				: Guid.Empty;
 	}
 
 	#region Dispose

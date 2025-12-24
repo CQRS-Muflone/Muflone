@@ -5,18 +5,18 @@ namespace Muflone.CustomTypes;
 
 public record When
 {
-	private readonly long _ticks;
+    private readonly long _ticks;
 
-	public DateTime Value => new(_ticks);
+    public DateTime Value => new(_ticks);
 
-	public When(DateTime dateTime)
-	{
-		_ticks = dateTime.Ticks;
-	}
+    public When(DateTime dateTime)
+    {
+        _ticks = dateTime.Ticks;
+    }
 
-	[JsonConstructor]
-	public When(long ticks)
-	{
-		_ticks = ticks;
-	}
+    [JsonConstructor]
+    public When(long ticks)
+    {
+        _ticks = ticks;
+    }
 }

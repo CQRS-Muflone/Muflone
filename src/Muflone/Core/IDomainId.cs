@@ -2,5 +2,5 @@
 
 public interface IDomainId
 {
-	string Value { get; }
+    string Value { get; }
 }

@@ -4,5 +4,5 @@ namespace Muflone.Messages.Commands;
 
 public interface ICommand : IMessage
 {
-	IDomainId AggregateId { get; }
+    IDomainId AggregateId { get; }
 }
