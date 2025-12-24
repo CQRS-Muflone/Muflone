@@ -5,39 +5,44 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Events;
 
-public abstract class DomainEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) : IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
+public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync<TEvent> where TEvent : class, IDomainEvent
 {
-    protected readonly ILoggerFactory LoggerFactory = loggerFactory;
+	protected readonly ILogger Logger;
 
-    public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+	protected DomainEventHandlerAsync(ILoggerFactory loggerFactory)
+	{
+		Logger = loggerFactory.CreateLogger(typeof(DomainEventHandlerAsync<TEvent>));
+	}
 
-    public Guid GetCorrelationId(TEvent @event)
-    {
-        @event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
-        return correlationId != null ?
-            Guid.Parse(correlationId.ToString()!)
-            : Guid.Empty;
-    }
+	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
-    #region Dispose
+	public Guid GetCorrelationId(TEvent @event)
+	{
+		@event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
+		return correlationId != null ?
+				Guid.Parse(correlationId.ToString()!)
+				: Guid.Empty;
+	}
 
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-        }
-    }
+	#region Dispose
 
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+		}
+	}
 
-    ~DomainEventHandlerAsync()
-    {
-        Dispose(false);
-    }
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
 
-    #endregion
+	~DomainEventHandlerAsync()
+	{
+		Dispose(false);
+	}
+
+	#endregion
 }
