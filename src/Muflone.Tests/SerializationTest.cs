@@ -8,30 +8,30 @@ namespace Muflone.Tests;
 
 public class SerializationTest
 {
-	[Fact]
-	public void Can_SerializeAndDeserialize_Event()
-	{
-		var accountId = Guid.NewGuid().ToString();
-		var stateUpdated = new StateUpdated(new StateId(Guid.NewGuid().ToString()), new Account(accountId, "Name"));
+    [Fact]
+    public void Can_SerializeAndDeserialize_Event()
+    {
+        var accountId = Guid.NewGuid().ToString();
+        var stateUpdated = new StateUpdated(new StateId(Guid.NewGuid().ToString()), new Account(accountId, "Name"));
 
-		Assert.False(stateUpdated.Headers.When.Value > DateTimeOffset.UtcNow);
-		Assert.Equal(accountId, stateUpdated.Headers.Who.Id);
-	}
+        Assert.False(stateUpdated.Headers.When.Value > DateTimeOffset.UtcNow);
+        Assert.Equal(accountId, stateUpdated.Headers.Who.Id);
+    }
 }
 
 public class StateUpdated : DomainEvent
 {
-	public readonly StateId StateId;
+    public readonly StateId StateId;
 
-	public StateUpdated(StateId aggregateId, Account who) : base(aggregateId, who)
-	{
-		StateId = aggregateId;
-	}
+    public StateUpdated(StateId aggregateId, Account who) : base(aggregateId, who)
+    {
+        StateId = aggregateId;
+    }
 }
 
 public class StateId : DomainId
 {
-	public StateId(string value) : base(value)
-	{
-	}
+    public StateId(string value) : base(value)
+    {
+    }
 }

@@ -6,46 +6,46 @@ using System.Threading.Tasks;
 
 namespace Muflone.Messages.Commands;
 
-public abstract class CommandHandlerAsync<TCommand> 
-	: ICommandHandlerAsync<TCommand> where TCommand : class, ICommand
+public abstract class CommandHandlerAsync<TCommand>
+    : ICommandHandlerAsync<TCommand> where TCommand : class, ICommand
 {
-	protected readonly IRepository Repository;
-	protected readonly ILogger Logger;
+    protected readonly IRepository Repository;
+    protected readonly ILogger Logger;
 
-	protected CommandHandlerAsync(IRepository repository, ILoggerFactory loggerFactory)
-	{
-		Repository = repository;
-		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
-	}
+    protected CommandHandlerAsync(IRepository repository, ILoggerFactory loggerFactory)
+    {
+        Repository = repository;
+        Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
+    }
 
-	protected CommandHandlerAsync(ILoggerFactory loggerFactory)
-	{
-		Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
-	}
+    protected CommandHandlerAsync(ILoggerFactory loggerFactory)
+    {
+        Logger = loggerFactory.CreateLogger(typeof(CommandHandlerAsync<TCommand>));
+    }
 
-	public abstract Task HandleAsync(TCommand command, CancellationToken cancellationToken = new());
+    public abstract Task HandleAsync(TCommand command, CancellationToken cancellationToken = new());
 
-	#region Dispose
+    #region Dispose
 
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-		}
-	}
-
-
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+        }
+    }
 
 
-	~CommandHandlerAsync()
-	{
-		Dispose(false);
-	}
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-	#endregion
+
+    ~CommandHandlerAsync()
+    {
+        Dispose(false);
+    }
+
+    #endregion
 }

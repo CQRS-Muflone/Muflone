@@ -2,9 +2,9 @@
 
 public class HeadersNames
 {
-	public const string CorrelationId = "CorrelationId";
-	public const string AccountId = "AccountId";
-	public const string AccountName = "Who";
-	public const string When = "When";
-	public const string AggregateType = "AggregateType";
+    public const string CorrelationId = "CorrelationId";
+    public const string AccountId = "AccountId";
+    public const string AccountName = "Who";
+    public const string When = "When";
+    public const string AggregateType = "AggregateType";
 }

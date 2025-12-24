@@ -2,5 +2,5 @@
 
 public interface IEvent : IMessage
 {
-	int Version { get; }
+    int Version { get; }
 }

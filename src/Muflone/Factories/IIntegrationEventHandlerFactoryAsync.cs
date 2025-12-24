@@ -5,5 +5,5 @@ namespace Muflone.Factories;
 
 public interface IIntegrationEventHandlerFactoryAsync
 {
-	IEnumerable<IIntegrationEventHandlerAsync<T>> CreateIntegrationEventHandlersAsync<T>() where T : class, IIntegrationEvent;
+    IEnumerable<IIntegrationEventHandlerAsync<T>> CreateIntegrationEventHandlersAsync<T>() where T : class, IIntegrationEvent;
 }

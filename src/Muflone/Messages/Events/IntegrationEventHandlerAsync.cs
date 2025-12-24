@@ -7,37 +7,37 @@ namespace Muflone.Messages.Events;
 
 public abstract class IntegrationEventHandlerAsync<TEvent>(ILoggerFactory loggerFactory) : IIntegrationEventHandlerAsync<TEvent> where TEvent : IntegrationEvent
 {
-	protected readonly ILoggerFactory LoggerFactory = loggerFactory;
+    protected readonly ILoggerFactory LoggerFactory = loggerFactory;
 
-	public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
-	
-	public Guid GetCorrelationId(TEvent @event)
-	{
-		@event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
-		return correlationId != null ? 
-			Guid.Parse(correlationId.ToString()!) 
-			: Guid.Empty;
-	}
+    public abstract Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
 
-	#region Dispose
+    public Guid GetCorrelationId(TEvent @event)
+    {
+        @event.UserProperties.TryGetValue(HeadersNames.CorrelationId, out var correlationId);
+        return correlationId != null ?
+            Guid.Parse(correlationId.ToString()!)
+            : Guid.Empty;
+    }
 
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-		}
-	}
+    #region Dispose
 
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+        }
+    }
 
-	~IntegrationEventHandlerAsync()
-	{
-		Dispose(false);
-	}
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-	#endregion
+    ~IntegrationEventHandlerAsync()
+    {
+        Dispose(false);
+    }
+
+    #endregion
 }

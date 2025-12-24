@@ -7,61 +7,61 @@ namespace Muflone.Core;
 //Taken from here: https://enterprisecraftsmanship.com/2017/08/28/value-object-a-better-implementation/
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-	/// <summary>
-	/// The class overriding this just need to return:
-	/// yield return Field1;
-	/// yield return Field2;
-	/// ...
-	/// yield return FieldN;
-	/// In case of lists, it is enough to do this:
-	/// foreach (Tenant tenant in Tenants)
-	/// {
-	///   yield return tenant;
-	/// }
-	/// </summary>
-	/// <returns>List of objects to compare</returns>
-	protected abstract IEnumerable<object?> GetEqualityComponents();
+    /// <summary>
+    /// The class overriding this just need to return:
+    /// yield return Field1;
+    /// yield return Field2;
+    /// ...
+    /// yield return FieldN;
+    /// In case of lists, it is enough to do this:
+    /// foreach (Tenant tenant in Tenants)
+    /// {
+    ///   yield return tenant;
+    /// }
+    /// </summary>
+    /// <returns>List of objects to compare</returns>
+    protected abstract IEnumerable<object?> GetEqualityComponents();
 
-	public bool Equals(ValueObject? other)
-	{
-		if (other is null)
-			return false;
+    public bool Equals(ValueObject? other)
+    {
+        if (other is null)
+            return false;
 
-		if (GetType() != other.GetType())
-			throw new ArgumentException($"Invalid comparison of Value Objects of different types: {GetType()} and {other.GetType()}");
+        if (GetType() != other.GetType())
+            throw new ArgumentException($"Invalid comparison of Value Objects of different types: {GetType()} and {other.GetType()}");
 
-		return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
-	}
+        return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+    }
 
-	public override bool Equals(object? obj)
-	{
-		return Equals(obj as ValueObject);
-	}
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as ValueObject);
+    }
 
-	public override int GetHashCode()
-	{
-		return GetEqualityComponents().Aggregate(1, (current, obj) =>
-		{
-			unchecked
-			{
-				return current * 23 + (obj?.GetHashCode() ?? 0);
-			}
-		});
-	}
+    public override int GetHashCode()
+    {
+        return GetEqualityComponents().Aggregate(1, (current, obj) =>
+        {
+            unchecked
+            {
+                return current * 23 + (obj?.GetHashCode() ?? 0);
+            }
+        });
+    }
 
-	public static bool operator ==(ValueObject? a, ValueObject? b)
-	{
-		if (a is null && b is null)
-			return true;
+    public static bool operator ==(ValueObject? a, ValueObject? b)
+    {
+        if (a is null && b is null)
+            return true;
 
-		if (a is null || b is null)
-			return false;
+        if (a is null || b is null)
+            return false;
 
-		return a == b;
-	}
+        return a == b;
+    }
 
-	public static bool operator !=(ValueObject? a, ValueObject? b)
-	{
-		return !(a == b);
-	}
+    public static bool operator !=(ValueObject? a, ValueObject? b)
+    {
+        return !(a == b);
+    }
 }
