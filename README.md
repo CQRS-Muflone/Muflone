@@ -10,7 +10,13 @@ A CQRS and event store library based on the great work of Jonathan Oliver with [
 
 Look at [this repo](https://github.com/CQRS-Muflone/CQRS-ES_testing_workshop)
 
-### Update 8.3
+## Update 10.1
+
+We introduced a breaking change in CommandHandler and EventHandler classes to enable OpenTelemetry support.
+In your existing classes you have to rename the method HandleAsync to HandleInternalAsync
+We also have upgraded the project to .NET 10 and updated all the dependencies to their latest versions.
+
+## Update 8.3
 
 Since this version we implemented a system to auto-create the consumers so that it is not necessary to create the consumers in your project anymore. This should reduce complexity and potential errors due to a missing consumer.
 You can now register directly your command and event handlers and that's it.

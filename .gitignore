@@ -351,5 +351,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# IDE Settings folders
 .cr/
-src/.idea
+.idea/
+.vscode/
