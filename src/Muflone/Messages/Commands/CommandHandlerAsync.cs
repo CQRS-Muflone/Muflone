@@ -26,7 +26,7 @@ public abstract class CommandHandlerAsync<TCommand> : ICommandHandlerAsync<TComm
 	//}
 
 	//Had to rename it to avoid conflict with the interface method and implement OpenTelemetry
-	protected abstract Task HandleInternalAsync(TCommand command, CancellationToken cancellationToken = default);
+	public abstract Task ProcessAsync(TCommand command, CancellationToken cancellationToken = default);
 
 	public async Task HandleAsync(TCommand command, CancellationToken cancellationToken = default)
 	{
@@ -41,7 +41,7 @@ public abstract class CommandHandlerAsync<TCommand> : ICommandHandlerAsync<TComm
 		try
 		{
 			Logger.LogDebug("[Muflone.CommandHandlerAsync.HandleAsync] Handling command {CommandType} with MessageId {MessageId}", typeof(TCommand).Name, command.MessageId);
-			await HandleInternalAsync(command, cancellationToken);
+			await ProcessAsync(command, cancellationToken);
 			Logger.LogDebug("[Muflone.CommandHandlerAsync.HandleAsync] Successfully handled command {CommandType} with MessageId {MessageId}", typeof(TCommand).Name, command.MessageId);
 		}
 		catch (Exception ex)

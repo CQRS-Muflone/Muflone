@@ -18,7 +18,7 @@ public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync
 		Logger = loggerFactory.CreateLogger(typeof(DomainEventHandlerAsync<TEvent>));
 	}
 
-	protected abstract Task HandleInternalAsync(TEvent @event, CancellationToken cancellationToken = default);
+	public abstract Task ProcessAsync(TEvent @event, CancellationToken cancellationToken = default);
 
 	public async Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default)
 	{
@@ -33,7 +33,7 @@ public abstract class DomainEventHandlerAsync<TEvent> : IDomainEventHandlerAsync
 		try
 		{
 			Logger.LogDebug("[Muflone.DomainEventHandlerAsync.HandleAsync] Handling domain event {EventType} with MessageId {MessageId}", typeof(TEvent).Name, @event.MessageId);
-			await HandleInternalAsync(@event, cancellationToken);
+			await ProcessAsync(@event, cancellationToken);
 			Logger.LogDebug("[Muflone.DomainEventHandlerAsync.HandleAsync] Successfully handled domain event {EventType} with MessageId {MessageId}", typeof(TEvent).Name, @event.MessageId);
 		}
 		catch (Exception ex)

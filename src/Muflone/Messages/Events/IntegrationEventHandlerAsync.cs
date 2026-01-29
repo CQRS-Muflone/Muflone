@@ -16,8 +16,8 @@ public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHa
 		ArgumentNullException.ThrowIfNull(loggerFactory);
 		Logger = loggerFactory.CreateLogger(typeof(IntegrationEventHandlerAsync<TEvent>));
 	}
-	
-	protected abstract Task HandleInternalAsync(TEvent @event, CancellationToken cancellationToken = default);
+
+	public abstract Task ProcessAsync(TEvent @event, CancellationToken cancellationToken = default);
 
 	public async Task HandleAsync(TEvent @event, CancellationToken cancellationToken = default)
 	{
@@ -32,7 +32,7 @@ public abstract class IntegrationEventHandlerAsync<TEvent> : IIntegrationEventHa
 		try
 		{
 			Logger.LogDebug("[Muflone.IntegrationEventHandlerAsync.HandleAsync] Handling integration event {EventType} with MessageId {MessageId}", typeof(TEvent).Name, @event.MessageId);
-			await HandleInternalAsync(@event, cancellationToken);
+			await ProcessAsync(@event, cancellationToken);
 			Logger.LogDebug("[Muflone.IntegrationEventHandlerAsync.HandleAsync] Successfully handled integration event {EventType} with MessageId {MessageId}", typeof(TEvent).Name, @event.MessageId);
 		}
 		catch (Exception ex)
