@@ -11,49 +11,49 @@ public static class MessageHandlerExtension
     private static readonly List<Type> HandlersTypeList = [];
     public static Type[] HandlersTypeReadOnlyList => HandlersTypeList.ToArray();
 
-    /// <summary>
-    /// Register a command handler
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddCommandHandler<T>(this IServiceCollection services) where T : ICommandHandlerAsync
+    extension(IServiceCollection services)
     {
-        return AddGenericHandler<T>(services);
-    }
+        /// <summary>
+        /// Register a command handler
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IServiceCollection AddCommandHandler<T>() where T : ICommandHandlerAsync
+        {
+            return services.AddGenericHandler<T>();
+        }
 
-    /// <summary>
-    /// Register a domain event handler
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddDomainEventHandler<T>(this IServiceCollection services) where T : IDomainEventHandlerAsync
-    {
-        return AddGenericHandler<T>(services);
-    }
+        /// <summary>
+        /// Register a domain event handler
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IServiceCollection AddDomainEventHandler<T>() where T : IDomainEventHandlerAsync
+        {
+            return services.AddGenericHandler<T>();
+        }
 
-    /// <summary>
-    /// Register an integration event handler
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddIntegrationEventHandler<T>(this IServiceCollection services) where T : IIntegrationEventHandlerAsync
-    {
-        return AddGenericHandler<T>(services);
-    }
+        /// <summary>
+        /// Register an integration event handler
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IServiceCollection AddIntegrationEventHandler<T>() where T : IIntegrationEventHandlerAsync
+        {
+            return services.AddGenericHandler<T>();
+        }
 
-    /// <summary>
-    /// Use this method to register a handler that is not related to commands or events.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddGenericHandler<T>(this IServiceCollection services)
-    {
-        HandlersTypeList.Add(typeof(T));
-        services.AddScoped(typeof(T));
-        return services;
+        /// <summary>
+        /// Use this method to register a handler that is not related to commands or events.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private IServiceCollection AddGenericHandler<T>()
+        {
+            HandlersTypeList.Add(typeof(T));
+            services.AddScoped(typeof(T));
+            return services;
+        }
     }
 }

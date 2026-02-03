@@ -27,7 +27,9 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
         RegisterCommandHandlers(consumerType, null, configuration);
         RegisterDomainEventHandlers(consumerType, null, configuration);
         RegisterIntegrationEventHandlers(consumerType, null, configuration);
-        RegisterGenericEventHandlers(consumerType, null, configuration);
+        // This generated a double subscription issue, so we comment it out for now
+        // An IDomainEventHandlerAsync is also an IMessageHandlerAsync!
+        // RegisterGenericEventHandlers(consumerType, null, configuration);
     }
 
     public void RegisterHandlers(IMessageHandlerAsync consumer, HandlerConfiguration? configuration = null)
@@ -36,7 +38,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
         RegisterCommandHandlers(consumerType, consumer, configuration);
         RegisterDomainEventHandlers(consumerType, consumer, configuration);
         RegisterIntegrationEventHandlers(consumerType, consumer, configuration);
-        RegisterGenericEventHandlers(consumerType, consumer, configuration);
+        // RegisterGenericEventHandlers(consumerType, consumer, configuration);
     }
 
     private void RegisterCommandHandlers(Type consumerType, object? consumerInstance,
