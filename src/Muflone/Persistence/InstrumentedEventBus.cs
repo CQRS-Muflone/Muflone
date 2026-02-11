@@ -26,7 +26,9 @@ public sealed class InstrumentedEventBus : IEventBus
 	public async Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEvent
 	{
 		var activityName = $"{typeof(T).Name} publish";
-		Activity? activity = ActivitySource.StartActivity(activityName, ActivityKind.Producer);
+		Activity? activity = OpenTelemetryMessageHelpers.TryExtractParentContext(@event, out var parentContext)
+			? ActivitySource.StartActivity(activityName, ActivityKind.Producer, parentContext)
+			: ActivitySource.StartActivity(activityName, ActivityKind.Producer);
 
 		try
 		{

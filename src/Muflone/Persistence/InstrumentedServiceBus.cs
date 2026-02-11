@@ -26,7 +26,9 @@ public sealed class InstrumentedServiceBus : IServiceBus
 	public async Task SendAsync<T>(T command, CancellationToken cancellationToken = default) where T : class, ICommand
 	{
 		var activityName = $"{typeof(T).Name} send";
-		Activity? activity = ActivitySource.StartActivity(activityName, ActivityKind.Producer);
+		Activity? activity = OpenTelemetryMessageHelpers.TryExtractParentContext(command, out var parentContext)
+			? ActivitySource.StartActivity(activityName, ActivityKind.Producer, parentContext)
+			: ActivitySource.StartActivity(activityName, ActivityKind.Producer);
 
 		try
 		{
