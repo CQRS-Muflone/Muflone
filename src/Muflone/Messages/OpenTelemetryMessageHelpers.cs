@@ -28,9 +28,11 @@ public static class OpenTelemetryMessageHelpers
 		if (activity == null || string.IsNullOrEmpty(activity.Id))
 			return;
 
-		message.UserProperties ??= new Dictionary<string, object>();
-		message.UserProperties[OpenTelemetryConstants.TraceParentKey] = activity.Id;
-
+		if (message.UserProperties == null || !message.UserProperties.ContainsKey(OpenTelemetryConstants.TraceParentKey))
+		{
+			message.UserProperties = new Dictionary<string, object>();
+			message.UserProperties[OpenTelemetryConstants.TraceParentKey] = activity.Id;
+		}
 		if (!string.IsNullOrEmpty(activity.TraceStateString))
 			message.UserProperties[OpenTelemetryConstants.TraceStateKey] = activity.TraceStateString;
 	}
