@@ -1,4 +1,4 @@
-﻿using MassTransit;
+using MassTransit;
 using Muflone.Core;
 using Muflone.CustomTypes;
 using System;
@@ -14,7 +14,7 @@ public abstract class Command(IDomainId aggregateId, Guid commitId, Account who,
 {
     public IDomainId AggregateId { get; set; } = aggregateId;
     public Guid MessageId { get; set; } = commitId;
-    public Dictionary<string, object> UserProperties { get; set; } = new();
+    public Dictionary<string, object> UserProperties { get; set; } = OpenTelemetryMessageHelpers.CreateUserProperties();
     public Account Who { get; } = who;
     public When When { get; } = when;
 
