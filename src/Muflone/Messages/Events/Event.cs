@@ -1,4 +1,4 @@
-﻿using MassTransit;
+using MassTransit;
 using Muflone.Core;
 using Muflone.CustomTypes;
 using System;
@@ -46,10 +46,8 @@ public class Event : IEvent
             When = when
         };
         //TODO: Delete Headers. Replace with Userprops and move them in Envelope away from here
-        UserProperties = new Dictionary<string, object>
-        {
-            { HeadersNames.CorrelationId, correlationId }
-        };
+        UserProperties = OpenTelemetryMessageHelpers.CreateUserProperties();
+        UserProperties[HeadersNames.CorrelationId] = correlationId;
 
         MessageId = NewId.NextGuid();
         AggregateId = aggregateId;
