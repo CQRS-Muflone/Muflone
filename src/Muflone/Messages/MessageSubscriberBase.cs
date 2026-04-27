@@ -130,7 +130,9 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded");
+                _logger.LogError(
+                    $"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded",
+                    ex);
             }
         }
 
@@ -158,7 +160,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error while deserializing message of type {typeof(T).Name}. The message will be discarded");
+            _logger.LogError($"Error while deserializing message of type {typeof(T).Name}. The message will be discarded", ex);
         }
 
         return null;
