@@ -130,7 +130,9 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded", ex);
+                _logger.LogError(
+                    $"Error while processing message of type {typeof(T).Name}, consumer {handlerConsumerInstance.GetType().Name}. The message will be discarded",
+                    ex);
             }
         }
 
