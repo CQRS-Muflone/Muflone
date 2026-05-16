@@ -10,6 +10,10 @@ A CQRS and event store library based on the great work of Jonathan Oliver with [
 
 Look at [this repo](https://github.com/CQRS-Muflone/CQRS-ES_testing_workshop)
 
+## Update 10.2
+
+Handler subscriptions now use the handler type's full name when generating consumer names. This improves support for transports such as service bus and avoids naming collisions when different namespaces contain handlers with the same class name.
+
 ## Update 8.3
 
 Since this version we implemented a system to auto-create the consumers so that it is not necessary to create the consumers in your project anymore. This should reduce complexity and potential errors due to a missing consumer.
