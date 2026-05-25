@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>10.2.1</Version>
+    <Version>10.2.2</Version>
     <Authors>Alessandro Colla, Alberto Acerbis</Authors>
     <Product>Muflone</Product>
     <Description>A CQRS and event store library</Description>
@@ -16,7 +16,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Added OpenTelemetry support in CommandHandler, DomainEventHandler, and IntegrationEventHandler</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix naming for improved support in servicebus</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <Title>Muflone</Title>
   </PropertyGroup>
@@ -33,11 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />
     <PackageReference Include="NewId" Version="4.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="OpenTelemetry.Api" Version="1.15.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
   </ItemGroup>
 
 </Project>

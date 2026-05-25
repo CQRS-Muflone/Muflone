@@ -137,7 +137,7 @@ public abstract class MessageSubscriberBase<TChannel>(ILoggerFactory loggerFacto
 
         var eventName = typeof(T).Name;
         HandlerSubscription<TChannel> handlerSubscription = new(
-                consumerType.Name,
+                consumerType.FullName ?? consumerType.Name,
                 eventName,
                 typeof(T),
                 configuration,
